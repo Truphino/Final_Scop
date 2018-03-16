@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:19:09 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 18:37:44 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:42:55 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ t_obj_data		*load_object()
 	return (obj);
 }
 
+void		setUniformMatrix(GLuint shader_programme, t_scene *scene)
+{
+	scene->uni_model_matrix =
+		glGetUniformLocation(shader_programme, "model_matrix");
+	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
+			scene->model_matrix);
+	scene->camera.uni_view_matrix =
+		glGetUniformLocation(shader_programme, "view_matrix");
+	glUniformMatrix4fv(scene->camera.uni_view_matrix, 1, GL_FALSE,
+			scene->camera.view_matrix);
+	scene->uni_project_matrix =
+		glGetUniformLocation(shader_programme, "projection_matrix");
+	glUniformMatrix4fv(scene->uni_project_matrix, 1, GL_FALSE,
+			scene->projection);
+}
+
 void		hello_triangle(t_scene *scene)
 {
 	t_obj_data	*od;
@@ -61,12 +77,12 @@ void		hello_triangle(t_scene *scene)
 	obj_colours = generate_vbo(od);
 
 	float points[] = {
-	0.5f, 0.4f, -0.5f,
-	0.5f, -0.5f, -0.5f,
-	-0.4f, -0.5f, -0.5f,
-	-0.5f, 0.5f, -0.5f,
-	0.4f, 0.5f, -0.5f,
-	-0.5f, -0.4f, -0.5f,
+	0.5f, 0.4f, 0.0f,
+	0.5f, -0.5f, 0.0f,
+	-0.4f, -0.5f, 0.0f,
+	-0.5f, 0.5f, 0.0f,
+	0.4f, 0.5f, 0.0f,
+	-0.5f, -0.4f, 0.0f,
 	};
 
 	float colours[] = {
@@ -124,7 +140,6 @@ void		hello_triangle(t_scene *scene)
 	glShaderSource(fs, 1, &fragment_shader, NULL);
 	compile_shader_log(fs);
 
-
 	GLuint shader_programme = glCreateProgram();
 	glAttachShader(shader_programme, fs);
 	glAttachShader(shader_programme, vs);
@@ -137,6 +152,8 @@ void		hello_triangle(t_scene *scene)
 	glClearColor(0.6, 0.6, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glUseProgram(shader_programme);
+
+	setUniformMatrix(shader_programme, scene);
 
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 2 * 3);

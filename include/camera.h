@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 10:46:45 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/15 12:41:59 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:14:30 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,16 @@
 
 typedef struct
 {
-	int				flags;
-	t_transform		transformation;
+	GLuint			uni_view_matrix;
+	t_vector		eye;
+	t_vector		look_at;
 	t_matrix		view_matrix;
 	t_matrix		inverse_view_matrix;
-	t_vector		origin;
-	t_vector		direction;
-	t_vector		eye;
-	t_vector		up;
-	t_vector		right;
-	double			fov;
-	double			half_width;
-	double			half_height;
-	double			pixel_width;
-
-	GLuint			uniTrans;
+	float			fov;
+	float			tan_half_height;
 }					t_camera;
 
 void				default_camera(t_camera *camera);
-void				initialize_camera(t_camera *camera, t_window *window);
-void				apply_camera_transform(t_camera *camera,
-											t_transform transf);
+void				compute_look_at_view_matrix(t_camera *camera);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 10:52:53 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 15:39:34 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:05:37 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@ typedef struct				s_scene
 {
 	t_obj_data				*od;
 	int						flags;
-	t_matrix				projection;
 	t_matrix				screen_space;
 	t_camera				camera;
 	t_window				window;
+	t_matrix				model_matrix;
+	t_transform				model_transformation;
+	t_matrix				projection;
+	GLuint					uni_project_matrix;
+	GLuint					uni_model_matrix;
 }							t_scene;
 
 void						kill_sdl(t_scene *scene, char *str, int fd);

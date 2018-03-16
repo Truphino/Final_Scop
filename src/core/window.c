@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 18:20:06 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:13:38 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void			initialize_window(t_window *window)
 	SDL_DEPTH = 32;
 	SDL_WINDOW = SDL_CreateWindow("ray tracing", 100, 200,
 	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL);
-	SDL_FRAME_BUFFER = malloc(SDL_WIDTH * SDL_HEIGHT * 4);
-	window->z_buffer = malloc(sizeof(double) * SDL_WIDTH * SDL_HEIGHT);
 	window->aspect_ratio = (double)SDL_WIDTH / (double)SDL_HEIGHT;
 	window->inverse_aspect_ratio = (double)SDL_HEIGHT / (double)SDL_WIDTH;
 	if ((window->gl_context = SDL_GL_CreateContext(SDL_WINDOW)) == NULL)

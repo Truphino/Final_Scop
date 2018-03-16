@@ -6,7 +6,7 @@
 /*   By: trecomps <trecomps@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 10:51:49 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 15:39:26 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:13:41 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ typedef	struct		s_sdlwindow
 	t_matrix		screen_space;
 	double			aspect_ratio;
 	double			inverse_aspect_ratio;
-	double			*z_buffer;
-	char			*frame_buffer;
 	int				width;
 	int				height;
 	int				depth;

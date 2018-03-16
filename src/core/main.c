@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 18:34:07 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:27:04 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,11 @@ void		usage(void)
 	exit(0);
 }
 
-void		init_view_matrices(t_scene *scene)
+static void	init_view_matrice(t_scene *scene)
 {
-	double width;
-	double height;
-	double fov;
-
-	fov = scene->camera.half_height;
-	width = scene->window.width;
-	height = scene->window.height;
-	init_screen_space(scene->screen_space, width, height);
-	new_perspective_matrix(scene->projection, fov, width / height);
+	new_perspective_matrix(scene->projection,
+			scene->camera.tan_half_height,
+			scene->window.height / scene->window.width);
 }
 
 int			main(int argc, char **argv)
@@ -37,8 +31,7 @@ int			main(int argc, char **argv)
 
 	initialize_scene(&scene);
 	initialize_window(&scene.window);
-	initialize_camera(&scene.camera, &scene.window);
-//	init_view_matrices(&scene);
+	//init_view_matrice(&scene);
 	put_image(&scene);
 	return (0);
 }
