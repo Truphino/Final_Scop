@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 13:11:33 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/19 11:12:56 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vector	new_vector(double x, double y, double z)
 	n.x = x;
 	n.y = y;
 	n.z = z;
-	n.w = 1;
+	n.w = 0;
 	return (n);
 }
 

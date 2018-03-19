@@ -6,16 +6,11 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:19:09 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 12:42:55 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:31:23 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
-
-void			print_vector(t_vector v)
-{
-	printf("V.x:%f;\tV.y:%f;\tV.z:%f;\tV.w%f\n", v.x, v.y, v.z, v.w);
-}
 
 void			print_loaded_obj(t_obj_data *obj)
 {
@@ -51,6 +46,22 @@ t_obj_data		*load_object()
 
 void		setUniformMatrix(GLuint shader_programme, t_scene *scene)
 {
+	t_matrix	res;
+	t_matrix	res2;
+	t_vector	res3;
+	t_vector	tmp;
+
+	tmp = new_point(5, 4, 0, 1);
+	matrix_multiply(res, scene->projection, scene->camera.view_matrix);
+	matrix_multiply(res2, res, scene->model_matrix);
+	res3 = matrix_transform_raster_point(&tmp, res2);
+	printf("%f\t%f\t%f\t%f\n", res3.x, res3.y, res3.z, res3.w);
+	printf("%f\t%f\t%f\n\n", res3.x / res3.w, res3.y / res3.w, res3.z / res3.w);
+
+	transpose_matrix(scene->model_matrix);
+	transpose_matrix(scene->camera.view_matrix);
+	transpose_matrix(scene->projection);
+
 	scene->uni_model_matrix =
 		glGetUniformLocation(shader_programme, "model_matrix");
 	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
@@ -63,6 +74,10 @@ void		setUniformMatrix(GLuint shader_programme, t_scene *scene)
 		glGetUniformLocation(shader_programme, "projection_matrix");
 	glUniformMatrix4fv(scene->uni_project_matrix, 1, GL_FALSE,
 			scene->projection);
+	
+	transpose_matrix(scene->model_matrix);
+	transpose_matrix(scene->camera.view_matrix);
+	transpose_matrix(scene->projection);
 }
 
 void		hello_triangle(t_scene *scene)
@@ -77,12 +92,12 @@ void		hello_triangle(t_scene *scene)
 	obj_colours = generate_vbo(od);
 
 	float points[] = {
-	0.5f, 0.4f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	-0.4f, -0.5f, 0.0f,
-	-0.5f, 0.5f, 0.0f,
-	0.4f, 0.5f, 0.0f,
-	-0.5f, -0.4f, 0.0f,
+	5.f, 4.f, 0.f,
+	5.f, -5.f, 0.f,
+	-4.f, -5.f, 0.f,
+	-5.f, 5.f, 0.f,
+	4.f, 5.f, 0.f,
+	-5.f, -4.f, 0.f,
 	};
 
 	float colours[] = {

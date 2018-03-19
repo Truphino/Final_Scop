@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 21:23:45 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/15 15:24:02 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/19 10:01:24 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void		matrix_multiply(t_matrix res, t_matrix m1, t_matrix m2);
 void		identity_matrix(t_matrix m);
 
 void		print_matrix(t_matrix matrix);
+void		transpose_matrix(t_matrix src);
 
 #endif

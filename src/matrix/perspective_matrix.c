@@ -6,11 +6,12 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 15:23:30 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:25:46 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
+#include <stdio.h>
 
 void	new_perspective_matrix(t_matrix m,
 							double fov,
@@ -20,9 +21,9 @@ void	new_perspective_matrix(t_matrix m,
 	double		z_far;
 	double		z_range;
 
-	z_near = 1.0 / fov;
-	z_far = 10000.0;
-	z_range = z_near - z_far;
+	z_near = 1.0;
+	z_far = 100.0;
+	z_range =  z_near - z_far;
 	m[0 * 4 + 0] = 1.0f / (fov * aspect_ratio);
 	m[0 * 4 + 1] = 0;
 	m[0 * 4 + 2] = 0;

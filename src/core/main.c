@@ -6,23 +6,17 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 15:27:04 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:47:25 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-void		usage(void)
-{
-	ft_putstr("usage : ./rt [example.rtsd]\n");
-	exit(0);
-}
-
-static void	init_view_matrice(t_scene *scene)
+static void	init_proj_matrix(t_scene *scene)
 {
 	new_perspective_matrix(scene->projection,
 			scene->camera.tan_half_height,
-			scene->window.height / scene->window.width);
+			(double)scene->window.width / (double)scene->window.height);
 }
 
 int			main(int argc, char **argv)
@@ -31,7 +25,7 @@ int			main(int argc, char **argv)
 
 	initialize_scene(&scene);
 	initialize_window(&scene.window);
-	//init_view_matrice(&scene);
+	init_proj_matrix(&scene);
 	put_image(&scene);
 	return (0);
 }
