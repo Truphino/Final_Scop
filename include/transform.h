@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 21:02:31 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/12 10:55:13 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 11:23:54 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct
 {
 	int			flags;
 	t_vector	scale;
+	t_vector	pr_translation;
 	t_vector	rotation;
 	t_vector	translation;
 }				t_transform;
@@ -53,6 +54,4 @@ void			build_inverse_scale_matrix(t_matrix m,
 void			build_inverse_transformation_matrix(t_matrix inverse_transform,
 				t_transform t);
 
-t_transform		new_transformation(t_vector scale,
-				t_vector rotation, t_vector translation);
 #endif

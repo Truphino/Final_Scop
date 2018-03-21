@@ -6,13 +6,13 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:46:17 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 15:06:59 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:40:21 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-int			restart_log()
+int			restart_log(void)
 {
 	int		fd;
 
@@ -24,8 +24,7 @@ int			restart_log()
 	ft_putendl_fd("-------------------------------------------------", fd);
 	ft_putendl_fd(__DATE__ " " __TIME__, fd);
 	close(fd);
-
-	return 1;
+	return (1);
 }
 
 int			gl_log(const char *message)
@@ -39,5 +38,5 @@ int			gl_log(const char *message)
 	}
 	ft_putstr_fd(message, fd);
 	close(fd);
-	return 1;
+	return (1);
 }

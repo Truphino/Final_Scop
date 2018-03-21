@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 15:22:24 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 12:10:36 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:50:59 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ GLfloat			*opengl_matrix(GLfloat *gl_matrix, t_matrix matrix)
 	gl_matrix[13] = matrix[3 * 4 + 1];
 	gl_matrix[14] = matrix[3 * 4 + 2];
 	gl_matrix[15] = matrix[3 * 4 + 3];
-
-	return gl_matrix;
+	return (gl_matrix);
 }

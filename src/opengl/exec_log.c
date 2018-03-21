@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:54:29 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/13 11:58:12 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:40:56 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int			compile_shader_log(GLuint shader_index)
 		print_shader_info_log(shader_index);
 		exit(1);
 	}
-
-	return 1;
+	return (1);
 }
 
 int			link_program_log(GLuint program)
@@ -46,6 +45,5 @@ int			link_program_log(GLuint program)
 		print_program_info_log(program);
 		exit(1);
 	}
-
-	return 1;
+	return (1);
 }

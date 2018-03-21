@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/13 16:14:21 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:58:55 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ void		meta_obj(t_obj_data *od, const int fd)
 	free_if(line);
 }
 
-void		about_file(t_obj_data *od, int extension, const int fd)
-{
-	if (extension == OBJ)
-	{
-		return (meta_obj(od, fd));
-	}
-	else
-		exit(1);
-	close(fd);
-}
-
 void		reset_counter(t_obj_data *od)
 {
 	od->n_vertices = 0;
@@ -74,9 +63,39 @@ void		load_mesh(t_obj_data *od, char *file_name)
 	if (fd < 2)
 		exit(1);
 	extension = get_extension(file_name);
-	about_file(od, extension, fd);
+	if (extension == OBJ)
+		meta_obj(od, fd);
+	else
+		exit(1);
+	close(fd);
 	fd = open(file_name, O_RDONLY);
 	if (extension == OBJ)
 		load_obj(od, fd);
 	close(fd);
+}
+
+void		load_obj(t_obj_data *od, const int fd)
+{
+	char	*line;
+
+	line = NULL;
+	fetch_obj_data_mem(od);
+	reset_counter(od);
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (line[0] == 'v' && line[1] == ' ')
+		{
+			push_obj_vertex(od, &line);
+		}
+		else if (line[0] == 'v' && line[1] == 'n')
+		{
+			push_obj_normal(od, &line);
+		}
+		else if (line[0] == 'f')
+		{
+			push_obj_face_data(od, &line);
+		}
+		free_if(line);
+	}
+	free_if(line);
 }

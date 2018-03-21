@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/19 10:00:23 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:50:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ void	print_matrix(t_matrix matrix)
 				matrix[i * 4 + 0],
 				matrix[i * 4 + 1],
 				matrix[i * 4 + 2],
-				matrix[i * 4 + 3]
-				);
+				matrix[i * 4 + 3]);
 }

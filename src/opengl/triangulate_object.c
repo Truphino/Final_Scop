@@ -6,13 +6,13 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:32:10 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/14 13:32:11 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:49:32 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-static int			calcutate_triangle(t_obj_data *od)
+static int		calcutate_triangle(t_obj_data *od)
 {
 	int		i;
 	int		n_triangle;
@@ -45,25 +45,24 @@ static void		load_vertices_triangle(t_obj_data *od, int i, int j, int second)
 	if (second == 0)
 	{
 		load_vertice_value(od, od->face_indexes[i * 4 + 0],
-				od->triangle_vertices + (j * (3 + 0) * 3));
+				od->triangle_vertices + (j * 9 + 0));
 		load_vertice_value(od, od->face_indexes[i * 4 + 1],
-				od->triangle_vertices + (j * (3 + 1) * 3));
+				od->triangle_vertices + (j * 9 + 3));
 		load_vertice_value(od, od->face_indexes[i * 4 + 2],
-				od->triangle_vertices + (j * (3 + 2) * 3));
-//		od->triangle_vertices[j * 3 + 0] = od->face_indexes[i * 4 + 0];
+				od->triangle_vertices + (j * 9 + 6));
 	}
 	else
 	{
 		load_vertice_value(od, od->face_indexes[i * 4 + 0],
-				od->triangle_vertices + (j * (3 + 0) * 3));
+				od->triangle_vertices + (j * 9 + 0));
 		load_vertice_value(od, od->face_indexes[i * 4 + 2],
-				od->triangle_vertices + (j * (3 + 1) * 3));
+				od->triangle_vertices + (j * 9 + 3));
 		load_vertice_value(od, od->face_indexes[i * 4 + 3],
-				od->triangle_vertices + (j * (3 + 2) * 3));
+				od->triangle_vertices + (j * 9 + 6));
 	}
 }
 
-void		triangulate_obj(t_obj_data *od)
+void			triangulate_obj(t_obj_data *od)
 {
 	int		i;
 	int		j;

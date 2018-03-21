@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   external_headers.h                                 :+:      :+:    :+:   */
+/*   parse_tga.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 13:55:38 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/21 09:04:50 by trecomps         ###   ########.fr       */
+/*   Created: 2018/03/21 09:37:25 by trecomps          #+#    #+#             */
+/*   Updated: 2018/03/21 09:40:25 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __EXTERNAL_HEADERS_H
-# define __EXTERNAL_HEADERS_H
+#include "parse.h"
 
-# include <unistd.h>
-# include <fcntl.h>
-# include <fcntl.h>
-# include <limits.h>
-# include <math.h>
-# include <stdlib.h>
-# include <float.h>
-# include <time.h>
-# include <SDL2/SDL.h>
-# include "glew.h"
-# include <OpenGl/gl.h>
+char		*parse_tga(char *filename)
+{
+	char	*file_as_string;
+	int		fd;
 
-#endif
+	fd = open(filename, O_RDONLY);
+	file_as_string = file_to_string(fd);
+	close(fd);
+	return (NULL);
+}

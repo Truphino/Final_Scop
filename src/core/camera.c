@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/19 16:13:11 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:59:43 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void			compute_look_at_view_matrix(t_camera *camera)
 			camera->view_matrix + (4 * 1));
 	fill_matrix_line(vz, -dot_product(vz, camera->eye),
 			camera->view_matrix + (4 * 2));
-	fill_matrix_line(new_vector(0, 0, 0), 1, 
+	fill_matrix_line(new_vector(0, 0, 0), 1,
 			camera->view_matrix + (4 * 3));
 }
 
-void		default_camera(t_camera *camera)
+void			default_camera(t_camera *camera)
 {
 	camera->fov = FOV;
 	camera->tan_half_height = tan(degrees_to_radians(camera->fov / 2));

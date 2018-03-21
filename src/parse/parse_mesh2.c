@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:15:15 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/14 12:11:07 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:56:32 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		load_subfield(t_obj_data *od, char *tokens, size_t len, int pos)
 	}
 }
 
-void		push_obj_face_data_2(t_obj_data *od, char **line)
+void		push_obj_face_data(t_obj_data *od, char **line)
 {
 	int		i;
 	char	*tokens;
@@ -104,30 +104,4 @@ void		push_obj_face_data_2(t_obj_data *od, char **line)
 		i++;
 	}
 	od->n_faces++;
-}
-
-void		load_obj(t_obj_data *od, const int fd)
-{
-	char	*line;
-
-	line = NULL;
-	fetch_obj_data_mem(od);
-	reset_counter(od);
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (line[0] == 'v' && line[1] == ' ')
-		{
-			push_obj_vertex(od, &line);
-		}
-		else if (line[0] == 'v' && line[1] == 'n')
-		{
-			push_obj_normal(od, &line);
-		}
-		else if (line[0] == 'f')
-		{
-			push_obj_face_data_2(od, &line);
-		}
-		free_if(line);
-	}
-	free_if(line);
 }

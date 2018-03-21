@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/26 14:32:25 by dgaitsgo          #+#    #+#              #
-#    Updated: 2018/03/15 15:40:11 by trecomps         ###   ########.fr        #
+#    Updated: 2018/03/21 14:21:59 by trecomps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,16 @@ SRC_FILES = \
 ./src/matrix/rotation_matrix.c\
 ./src/matrix/screen_space.c\
 ./src/matrix/transformation_matrix.c\
+./src/opengl/load_obj.c\
 ./src/opengl/error_log.c\
 ./src/opengl/exec_log.c\
 ./src/opengl/generate_vbo.c\
-./src/opengl/hello_triangle.c\
+./src/opengl/render_obj.c\
 ./src/opengl/init_opengl.c\
 ./src/opengl/load_shaders.c\
 ./src/opengl/print_log.c\
 ./src/opengl/triangulate_object.c\
+./src/opengl/load_texture_bmp.c\
 ./src/vector/vector.c\
 ./src/vector/vector_basic_ops.c\
 ./src/vector/vector_basic_ops2.c\

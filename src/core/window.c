@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 15:13:38 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 14:00:02 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void			initialize_window(t_window *window)
 		ft_putendl("Error while loading glew");
 		exit(1);
 	}
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
 }
 
 void			kill_sdl(t_scene *scene, char *str, int fd)
@@ -51,9 +53,7 @@ void			put_image(t_scene *scene)
 	t_window	*window;
 
 	window = &scene->window;
-	setGlColor(window, 0, 1, 1, 1);
-
-	hello_triangle(scene);
-
+	set_gl_color(window, new_vector(0, 0, 1), 1);
+	render_obj(scene);
 	poll_events(scene);
 }

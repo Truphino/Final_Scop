@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/19 16:41:33 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 15:11:21 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,66 @@
 
 static void		rotate_model(t_scene *scene, int key)
 {
-	int			rotation_y;
-	int			rotation_x;
-
-	rotation_y = 0;
-	rotation_x = 0;
-	if (key == SDLK_LEFT)
-		rotation_y = 10;
-	else if (key == SDLK_RIGHT)
-		rotation_y = -10;
-	else if (key == SDLK_UP)
-		rotation_x = 10;
+	if (key == SDLK_RIGHT)
+		scene->model_transformation.rotation.y += 10;
+	else if (key == SDLK_LEFT)
+		scene->model_transformation.rotation.y -= 10;
 	else if (key == SDLK_DOWN)
-		rotation_x = -10;
-
-	scene->model_transformation.rotation.y += rotation_y;
-	scene->model_transformation.rotation.x += rotation_x;
+		scene->model_transformation.rotation.x += 10;
+	else if (key == SDLK_UP)
+		scene->model_transformation.rotation.x -= 10;
+	else if (key == SDLK_q)
+		scene->model_transformation.rotation.z += 10;
+	else if (key == SDLK_e)
+		scene->model_transformation.rotation.z -= 10;
 	build_transformation_matrix(scene->model_matrix,
 								scene->model_transformation);
-	transpose_matrix(scene->model_matrix);
+	transpose_matrix(scene->tr_model_matrix, scene->model_matrix);
 	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
-						scene->model_matrix);
-	transpose_matrix(scene->model_matrix);
+						scene->tr_model_matrix);
 }
 
 static void		translate_model(t_scene *scene, int key)
 {
-	int			translation_x;
-	int			translation_y;
-
-	translation_x = 0;
-	translation_y = 0;
 	if (key == SDLK_w)
-		translation_y += 1;
+		scene->model_transformation.translation.y += 1;
 	else if (key == SDLK_s)
-		translation_y -= 1;
+		scene->model_transformation.translation.y -= 1;
 	else if (key == SDLK_a)
-		translation_x -= 1;
+		scene->model_transformation.translation.x -= 1;
 	else if (key == SDLK_d)
-		translation_x += 1;
-	scene->model_transformation.translation.y += translation_y;
-	scene->model_transformation.translation.x += translation_x;
+		scene->model_transformation.translation.x += 1;
+	else if (key == SDLK_f)
+		scene->model_transformation.translation.z -= 1;
+	else if (key == SDLK_g)
+		scene->model_transformation.translation.z += 1;
 	build_transformation_matrix(scene->model_matrix,
 								scene->model_transformation);
-	transpose_matrix(scene->model_matrix);
+	transpose_matrix(scene->tr_model_matrix, scene->model_matrix);
 	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
-						scene->model_matrix);
-	transpose_matrix(scene->model_matrix);
+						scene->tr_model_matrix);
 }
 
-static void		print_all_matrix(t_scene *scene)
+static void		handle_keys(t_scene *scene, int key)
 {
-	print_matrix(scene->model_matrix);
-	ft_putchar('\n');
-	print_matrix(scene->camera.view_matrix);
-	ft_putchar('\n');
-	print_matrix(scene->projection);
-	ft_putchar('\n');
-	ft_putchar('\n');
+	if (key == SDLK_RIGHT || key == SDLK_LEFT ||
+			key == SDLK_UP || key == SDLK_DOWN ||
+			key == SDLK_q || key == SDLK_e)
+		rotate_model(scene, key);
+	if (key == SDLK_d || key == SDLK_a ||
+			key == SDLK_w || key == SDLK_s ||
+			key == SDLK_g || key == SDLK_f)
+		translate_model(scene, key);
+}
+
+static void		print_loop(t_scene *scene)
+{
+	t_window	*window;
+
+	window = &scene->window;
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDrawArrays(GL_TRIANGLES, 0, scene->od->n_triangle * 3);
+	SDL_GL_SwapWindow(SDL_WINDOW);
 }
 
 void			poll_events(t_scene *scene)
@@ -86,9 +88,7 @@ void			poll_events(t_scene *scene)
 	{
 		while (SDL_PollEvent(&SDL_EVENT))
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
-			glDrawArrays(GL_TRIANGLES, 0, 2 * 3);
-			SDL_GL_SwapWindow(SDL_WINDOW);
+			print_loop(scene);
 			if (SDL_EVENT.type == SDL_KEYDOWN)
 			{
 				if (SDL_EVENT.type == SDL_QUIT ||
@@ -97,10 +97,7 @@ void			poll_events(t_scene *scene)
 					quit = 1;
 					kill_sdl(scene, "", 2);
 				}
-				if (KEY == SDLK_RIGHT || KEY == SDLK_LEFT || KEY == SDLK_UP || KEY == SDLK_DOWN)
-					rotate_model(scene, KEY);
-				if (KEY == SDLK_d || KEY == SDLK_a || KEY == SDLK_w || KEY == SDLK_s)
-					translate_model(scene, KEY);
+				handle_keys(scene, KEY);
 			}
 		}
 	}

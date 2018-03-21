@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 11:53:08 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/13 11:58:23 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:48:23 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void		print_shader_info_log(GLuint shader_index)
 {
-	int max_length = 2048;
-	int actual_length = 0;
-	char shader_log[2048];
+	int		max_length;
+	int		actual_length;
+	char	shader_log[2048];
 
+	max_length = 2048;
+	actual_length = 0;
 	glGetShaderInfoLog(shader_index, max_length, &actual_length, shader_log);
 	gl_log("Shader info log for GL index ");
 	gl_log(ft_itoa(shader_index));
@@ -28,9 +30,12 @@ void		print_shader_info_log(GLuint shader_index)
 
 void		print_program_info_log(GLuint program)
 {
-	int max_length = 2048;
-	int actual_length = 0;
-	char program_log[2048];
+	int		max_length;
+	int		actual_length;
+	char	program_log[2048];
+
+	max_length = 2048;
+	actual_length = 0;
 	glGetProgramInfoLog(program, max_length, &actual_length, program_log);
 	gl_log("Program info log for GL index ");
 	gl_log(ft_itoa(program));

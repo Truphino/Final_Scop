@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 21:24:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/15 15:33:23 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:17:30 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ t_vector			matrix_transform_normal(t_vector *normal, t_matrix m);
 void				rotate_x(t_matrix rx, double x);
 void				rotate_y(t_matrix ry, double y);
 void				rotate_z(t_matrix rz, double z);
+
+void				print_vector(char *message, t_vector v);
 
 #endif

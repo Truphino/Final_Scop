@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scope.h                                        :+:      :+:    :+:   */
+/*   scope.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/12 10:52:53 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/16 12:05:37 by trecomps         ###   ########.fr       */
+/*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
+/*   Updated: 2018/03/20 14:18:49 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ typedef struct				s_scene
 	t_matrix				projection;
 	GLuint					uni_project_matrix;
 	GLuint					uni_model_matrix;
+	t_matrix				tr_projection;
+	t_matrix				tr_model_matrix;
 }							t_scene;
 
 void						kill_sdl(t_scene *scene, char *str, int fd);
-void						hello_triangle(t_scene *scene);
+void						render_obj(t_scene *scene);
 void						put_image(t_scene *scene);
 void						initialize_scene(t_scene *scene);
 void						poll_events(t_scene *scene);
@@ -42,5 +44,6 @@ void						free_obj_data_mem(t_obj_data *od);
 void						multi_free_4(void *addr1, void *addr2,
 								void *addr3, void *addr4);
 void						initialize_to_zero_2(int *a, int *b);
+t_obj_data					*load_object(char *filename, t_scene *scene);
 
 #endif

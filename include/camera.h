@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 10:46:45 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/16 15:14:30 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/20 14:18:13 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct
 	t_matrix		inverse_view_matrix;
 	float			fov;
 	float			tan_half_height;
+	t_matrix		tr_view_matrix;
 }					t_camera;
 
 void				default_camera(t_camera *camera);

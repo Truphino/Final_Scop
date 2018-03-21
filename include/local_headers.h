@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 11:57:20 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 15:09:35 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/21 10:54:33 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@
 # include "maths.h"
 # include "enums.h"
 # include "parse.h"
+# include "bmp_parser.h"
 
 #endif
