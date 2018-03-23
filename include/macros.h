@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 21:27:26 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/19 10:49:41 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:35:28 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define Z_NEAR								1.0f
 # define Z_FAR								100.0f
 # define Z_RANGE							Z_FAR - Z_NEAR
+# define ACTIVATE_CULL_FACE					0
 
 # define MIN(a,b) (((a)<(b))?(a):(b))
 # define MAX(a,b) (((a)>(b))?(a):(b))

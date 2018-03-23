@@ -1,51 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   free_obj_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/22 15:01:32 by trecomps         ###   ########.fr       */
+/*   Created: 2018/03/23 11:47:53 by trecomps          #+#    #+#             */
+/*   Updated: 2018/03/23 11:51:52 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-t_range					range(double min, double max)
+void			free_obj_data(t_obj_data *od)
 {
-	t_range	range;
-
-	range.min = min;
-	range.max = max;
-	return (range);
-}
-
-void					swap(double *a, double *b)
-{
-	double c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-
-void					free_if(void *ptr)
-{
-	if (ptr)
-		free(ptr);
-}
-
-void					free_null_terminated_tab(void **ptr)
-{
-	int		i;
-
-	i = 0;
-	while (ptr[i] != NULL)
-	{
-		free(ptr[i]);
-		ptr[i] = NULL;
-		i++;
-	}
-	free(ptr);
+	free_if(od->obj_colours);
+	free_if(od->final_textures);
+	free_if(od->final_normals);
+	free_if(od->vertices);
+	free_if(od->normals);
+	free_if(od->textures);
+	free_if(od->face_indexes);
+	free_if(od->texture_indexes);
+	free_if(od->normal_indexes);
 }

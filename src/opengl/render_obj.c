@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/21 16:33:10 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:31:35 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,44 +33,6 @@ void		set_uniform_matrix(GLuint shader_programme, t_scene *scene)
 			scene->tr_projection);
 }
 
-GLuint		bind_buffer_vbo(float *buffer, int size)
-{
-	GLuint vbo;
-
-	vbo = 0;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size,
-			buffer,
-			GL_STATIC_DRAW);
-	return (vbo);
-}
-
-GLuint		setup_vao(t_obj_data *od)
-{
-	GLuint	vao;
-	GLuint	point_vbo;
-	GLuint	colours_vbo;
-	GLuint	texture_vbo;
-
-	vao = 0;
-	point_vbo = bind_buffer_vbo(od->triangle_vertices, od->n_triangle * 9);
-	colours_vbo = bind_buffer_vbo(od->obj_colours, od->n_triangle * 9);
-	texture_vbo = bind_buffer_vbo(od->final_textures, od->n_triangle * 6);
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, point_vbo);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glBindBuffer(GL_ARRAY_BUFFER, colours_vbo);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glBindBuffer(GL_ARRAY_BUFFER, texture_vbo);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, NULL);
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-	return (vao);
-}
-
 void		render_obj(t_scene *scene)
 {
 	t_obj_data	*od;
@@ -80,22 +42,19 @@ void		render_obj(t_scene *scene)
 	GLuint		texture_id;
 
 	win = &scene->window;
-	od = load_object("./object_files/42.obj", scene);
+	od = load_object("./object_files/42_texture.obj", scene);
 	scene->od = od;
 	od->obj_colours = generate_vbo(od);
-	texture_id = load_texture_bmp("./texture/bronze_copper.bmp");
-	od->final_textures = generate_texture_vbo(od);
+	texture_id = load_texture_bmp("./texture/horse.bmp");
 	vao = setup_vao(od);
-	free(od->obj_colours);
 	shader_programme = create_program();
-	glUniform1i(glGetUniformLocation(shader_programme, "tex"), 0);
-//	glEnable(GL_CULL_FACE);
-//	glCullFace(GL_BACK);
-//	glFrontFace(GL_CCW);
+	activate_gl_options();
+	free_obj_data(od);
 	glClearColor(0.6, 0.6, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shader_programme);
 	set_uniform_matrix(shader_programme, scene);
+	glUniform1i(glGetUniformLocation(shader_programme, "tex"), 0);
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, od->n_triangle * 3);
 	SDL_GL_SwapWindow(win->window);

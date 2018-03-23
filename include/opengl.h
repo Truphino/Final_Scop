@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 12:23:19 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/21 14:22:31 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:32:11 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ void			print_shader_info_log(GLuint index);
 void			print_program_info_log(GLuint index);
 void			triangulate_obj(t_obj_data *od);
 float			*generate_vbo(t_obj_data *od);
-float			*generate_texture_vbo(t_obj_data *od);
+void			generate_texture_vbo(t_obj_data *od);
 GLuint			create_program();
 GLuint			load_texture_bmp(const char *filename);
+GLuint			load_texture_bmp_cubemap(const char *filename);
+void			load_normals(t_obj_data *od);
+void			load_compute_normals(t_obj_data *od);
+void			load_all(t_obj_data *od, int i, int j, int j_offset);
+void			activate_gl_options();
+GLuint			setup_vao(t_obj_data *od);
 
 GLfloat			*opengl_matrix(GLfloat *gl_matrix, t_matrix matrix);
 

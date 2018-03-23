@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:32:10 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/20 13:49:32 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:14:28 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,18 @@ static int		calcutate_triangle(t_obj_data *od)
 	return (n_triangle);
 }
 
-static void		load_vertice_value(t_obj_data *od, int index, float *load)
+void			fetch_memory_od(t_obj_data *od)
 {
-	t_vector	vertices;
-
-	vertices = od->vertices[index];
-	load[0] = vertices.x;
-	load[1] = vertices.y;
-	load[2] = vertices.z;
-}
-
-static void		load_vertices_triangle(t_obj_data *od, int i, int j, int second)
-{
-	if (second == 0)
-	{
-		load_vertice_value(od, od->face_indexes[i * 4 + 0],
-				od->triangle_vertices + (j * 9 + 0));
-		load_vertice_value(od, od->face_indexes[i * 4 + 1],
-				od->triangle_vertices + (j * 9 + 3));
-		load_vertice_value(od, od->face_indexes[i * 4 + 2],
-				od->triangle_vertices + (j * 9 + 6));
-	}
-	else
-	{
-		load_vertice_value(od, od->face_indexes[i * 4 + 0],
-				od->triangle_vertices + (j * 9 + 0));
-		load_vertice_value(od, od->face_indexes[i * 4 + 2],
-				od->triangle_vertices + (j * 9 + 3));
-		load_vertice_value(od, od->face_indexes[i * 4 + 3],
-				od->triangle_vertices + (j * 9 + 6));
-	}
+	od->triangle_vertices = (float *)ft_memalloc(sizeof(float) *
+			od->n_triangle * 9);
+	od->final_normals = (float *)ft_memalloc(sizeof(float) *
+			od->n_triangle * 9);
+	od->final_textures = (float *)ft_memalloc(sizeof(float) *
+			od->n_triangle * 6);
+	if (od->final_normals == NULL ||
+			od->final_textures == NULL ||
+			od->triangle_vertices == NULL)
+		exit(1);
 }
 
 void			triangulate_obj(t_obj_data *od)
@@ -68,20 +50,22 @@ void			triangulate_obj(t_obj_data *od)
 	int		j;
 
 	od->n_triangle = calcutate_triangle(od);
-	od->triangle_vertices = (float *)ft_memalloc(sizeof(float) *
-			od->n_triangle * 9);
+	fetch_memory_od(od);
 	i = 0;
 	j = 0;
 	while (i < od->n_faces)
 	{
-		load_vertices_triangle(od, i, j, 0);
+		load_all(od, i, j, 0);
 		if (od->face_indexes[i * 4 + 3] != -1)
 		{
 			j++;
-			load_vertices_triangle(od, i, j, 1);
+			load_all(od, i, j, 1);
 		}
 		j++;
 		i++;
 	}
-	i = -1;
+	if (od->n_normals <= 0)
+		load_compute_normals(od);
+	if (od->n_textures <= 0)
+		generate_texture_vbo(od);
 }

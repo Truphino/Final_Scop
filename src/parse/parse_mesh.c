@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/20 13:58:55 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/22 16:09:16 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void		meta_obj(t_obj_data *od, const int fd)
 			od->n_faces++;
 		if (line[0] == 'v' && line[1] == 'n')
 			od->n_normals++;
+		if (line[0] == 'v' && line[1] == 't')
+			od->n_textures++;
 		free_if(line);
 	}
 	free_if(line);
@@ -52,6 +54,7 @@ void		reset_counter(t_obj_data *od)
 	od->n_normals = 0;
 	od->n_normal_indexes = 0;
 	od->n_faces = 0;
+	od->n_textures = 0;
 }
 
 void		load_mesh(t_obj_data *od, char *file_name)
@@ -83,18 +86,7 @@ void		load_obj(t_obj_data *od, const int fd)
 	reset_counter(od);
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (line[0] == 'v' && line[1] == ' ')
-		{
-			push_obj_vertex(od, &line);
-		}
-		else if (line[0] == 'v' && line[1] == 'n')
-		{
-			push_obj_normal(od, &line);
-		}
-		else if (line[0] == 'f')
-		{
-			push_obj_face_data(od, &line);
-		}
+		parse_line(od, line);
 		free_if(line);
 	}
 	free_if(line);

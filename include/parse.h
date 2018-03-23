@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:04:40 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/20 13:58:29 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:48:49 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int			is_space(char c);
 int			in_comments(char *s);
 int			only_spaces(char *s);
 void		fetch_obj_data_mem(t_obj_data *od);
-void		push_obj_vertex(t_obj_data *od, char **line);
-void		push_obj_normal(t_obj_data *od, char **line);
+void		push_obj_vertex(t_obj_data *od, char *line);
+void		push_obj_normal(t_obj_data *od, char *line);
 void		load_subfield(t_obj_data *od,char *tokens, size_t len, int pos);
-void		push_obj_face_data(t_obj_data *od, char **line);
+void		push_obj_face_data(t_obj_data *od, char *line);
+void		push_obj_texture(t_obj_data *od, char *line);
+void		parse_line(t_obj_data *od, char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/20 15:11:21 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 12:22:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ static void		rotate_model(t_scene *scene, int key)
 		scene->model_transformation.rotation.z += 10;
 	else if (key == SDLK_e)
 		scene->model_transformation.rotation.z -= 10;
-	build_transformation_matrix(scene->model_matrix,
-								scene->model_transformation);
-	transpose_matrix(scene->tr_model_matrix, scene->model_matrix);
-	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
-						scene->tr_model_matrix);
+	send_model_mt_opengl(scene);
 }
 
 static void		translate_model(t_scene *scene, int key)
@@ -47,11 +43,14 @@ static void		translate_model(t_scene *scene, int key)
 		scene->model_transformation.translation.z -= 1;
 	else if (key == SDLK_g)
 		scene->model_transformation.translation.z += 1;
-	build_transformation_matrix(scene->model_matrix,
-								scene->model_transformation);
-	transpose_matrix(scene->tr_model_matrix, scene->model_matrix);
-	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
-						scene->tr_model_matrix);
+	send_model_mt_opengl(scene);
+}
+
+void			reset_model(t_scene *scene)
+{
+	scene->model_transformation.translation = new_vector(0, 0, 0);
+	scene->model_transformation.rotation = new_vector(0, 0, 0);
+	send_model_mt_opengl(scene);
 }
 
 static void		handle_keys(t_scene *scene, int key)
@@ -64,16 +63,8 @@ static void		handle_keys(t_scene *scene, int key)
 			key == SDLK_w || key == SDLK_s ||
 			key == SDLK_g || key == SDLK_f)
 		translate_model(scene, key);
-}
-
-static void		print_loop(t_scene *scene)
-{
-	t_window	*window;
-
-	window = &scene->window;
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDrawArrays(GL_TRIANGLES, 0, scene->od->n_triangle * 3);
-	SDL_GL_SwapWindow(SDL_WINDOW);
+	if (key == SDLK_o)
+		reset_model(scene);
 }
 
 void			poll_events(t_scene *scene)

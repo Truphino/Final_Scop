@@ -2,6 +2,7 @@
 
 in vec3 colour;
 in vec2 texture_coord;
+in vec3 frag_position;
 
 out vec4 frag_colour;
 

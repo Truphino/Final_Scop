@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   local_headers.h                                    :+:      :+:    :+:   */
+/*   mtl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 11:57:20 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/22 11:59:58 by trecomps         ###   ########.fr       */
+/*   Created: 2018/03/22 11:34:11 by trecomps          #+#    #+#             */
+/*   Updated: 2018/03/22 15:58:31 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __LOCAL_HEADERS_H
-# define __LOCAL_HEADERS_H
+#ifndef __MTL_H
+# define __MTL_H
 
-# include "opengl.h"
-# include "matrix.h"
-# include "vector.h"
-# include "camera.h"
-# include "transform.h"
-# include "window.h"
-# include "libft.h"
-# include "obj_data.h"
-# include "macros.h"
-# include "geometry.h"
-# include "maths.h"
-# include "enums.h"
-# include "parse.h"
-# include "bmp_parser.h"
-# include "mtl.h"
+typedef struct					s_mtl
+{
+	char						*name;
+	float						ambient_color[3];
+	float						diffuse_color[3];
+	float						specular_color[3];
+	float						specular_exponent;
+	float						transparency;
+	float						optical_density;
+	int							illumination_model;
+}								t_mtl;
+
+void							parse_mtl(t_mtl *mtl, char *filename);
+void							print_mtl(t_mtl mtl);
 
 #endif

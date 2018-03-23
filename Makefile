@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/26 14:32:25 by dgaitsgo          #+#    #+#              #
-#    Updated: 2018/03/21 14:21:59 by trecomps         ###   ########.fr        #
+#    Updated: 2018/03/23 12:32:29 by trecomps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES = \
 ./src/core/math.c\
 ./src/core/helpers2.c\
 ./src/core/helpers.c\
+./src/core/event_tool.c\
 ./src/matrix/copy_matrix.c\
 ./src/matrix/inverse_rotation_matrix.c\
 ./src/matrix/inverse_transformations.c\
@@ -49,6 +50,11 @@ SRC_FILES = \
 ./src/opengl/print_log.c\
 ./src/opengl/triangulate_object.c\
 ./src/opengl/load_texture_bmp.c\
+./src/opengl/load_normals.c\
+./src/opengl/load_values.c\
+./src/opengl/activate_gl_options.c\
+./src/opengl/free_obj_data.c\
+./src/opengl/setup_vao.c\
 ./src/vector/vector.c\
 ./src/vector/vector_basic_ops.c\
 ./src/vector/vector_basic_ops2.c\
@@ -60,8 +66,10 @@ SRC_FILES = \
 ./src/parse/file_to_string.c\
 ./src/parse/parse_mesh.c\
 ./src/parse/parse_mesh2.c\
+./src/parse/parse_mesh3.c\
 ./src/parse/parse_tools.c\
 ./src/parse/character_check.c\
+./src/parse/parse_mtl.c\
 
 
 OBJ_FILES = $(SRC_FILES:.c=.o) #$(addprefix $(OBJ_DIR)/,$(notdir $(SRC_FILES:.c=.o)))
@@ -84,6 +92,7 @@ INC_FILES = \
 ./include/vector.h\
 ./include/window.h\
 ./include/parse.h\
+./include/mtl.h\
 
 
 LIB_DIR = ./lib/libft

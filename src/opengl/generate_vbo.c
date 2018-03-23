@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:33:14 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/21 14:42:30 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 10:07:39 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,19 @@ float		*generate_vbo(t_obj_data *od)
 	return (vbo);
 }
 
-float		*generate_texture_vbo(t_obj_data *od)
+void		generate_texture_vbo(t_obj_data *od)
 {
-	float	*vbo;
 	int		i;
 
 	i = 0;
-	if ((vbo = (float *)malloc(sizeof(float) * od->n_triangle * 6)) == NULL)
-		exit(1);
 	while (i < od->n_triangle)
 	{
-		vbo[i * 6 + 0] = 0;
-		vbo[i * 6 + 1] = 0;
-		vbo[i * 6 + 2] = 1;
-		vbo[i * 6 + 3] = 0;
-		vbo[i * 6 + 4] = 1;
-		vbo[i * 6 + 5] = 1;
+		od->final_textures[i * 6 + 0] = 0;
+		od->final_textures[i * 6 + 1] = 0;
+		od->final_textures[i * 6 + 2] = 1;
+		od->final_textures[i * 6 + 3] = 0;
+		od->final_textures[i * 6 + 4] = 1;
+		od->final_textures[i * 6 + 5] = 1;
 		i++;
 	}
-	return (vbo);
 }
