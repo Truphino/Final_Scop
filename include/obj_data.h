@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 11:23:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/23 11:48:52 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/28 12:01:27 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct	s_obj_data
 	float		*triangle_vertices;
 	GLuint		uni_text;
 	GLuint		smooth_shading;
+	float		*explodes_vectors;
+	GLuint		uni_explode_coef;
+	float		explode_coef;
 }				t_obj_data;
 
 t_obj_data		*new_obj_data(void);

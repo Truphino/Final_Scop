@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 12:19:31 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/28 12:01:07 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ typedef struct				s_scene
 	t_matrix				projection;
 	GLuint					uni_project_matrix;
 	GLuint					uni_model_matrix;
-	t_matrix				tr_projection;
-	t_matrix				tr_model_matrix;
 }							t_scene;
 
 void						free_null_terminated_tab(void **ptr);

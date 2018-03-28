@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/23 12:22:42 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/28 13:04:45 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,34 @@ void			reset_model(t_scene *scene)
 	send_model_mt_opengl(scene);
 }
 
+void			explode_model(t_scene *scene, int key)
+{
+	if (key == SDLK_j)
+	{
+		if (scene->od->explode_coef >= 0.1f)
+			scene->od->explode_coef -= 0.1f;
+		else
+			scene->od->explode_coef = 0;
+	}
+	else if (key == SDLK_k)
+		scene->od->explode_coef += 0.1f;
+	glUniform1f(scene->od->uni_explode_coef, scene->od->explode_coef);
+}
+
 static void		handle_keys(t_scene *scene, int key)
 {
 	if (key == SDLK_RIGHT || key == SDLK_LEFT ||
 			key == SDLK_UP || key == SDLK_DOWN ||
 			key == SDLK_q || key == SDLK_e)
 		rotate_model(scene, key);
-	if (key == SDLK_d || key == SDLK_a ||
+	else if (key == SDLK_d || key == SDLK_a ||
 			key == SDLK_w || key == SDLK_s ||
 			key == SDLK_g || key == SDLK_f)
 		translate_model(scene, key);
-	if (key == SDLK_o)
+	else if (key == SDLK_o)
 		reset_model(scene);
+	else if (key == SDLK_j || key == SDLK_k)
+		explode_model(scene, key);
 }
 
 void			poll_events(t_scene *scene)

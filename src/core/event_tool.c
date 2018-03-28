@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 12:16:02 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 12:19:13 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/28 11:14:48 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		send_model_mt_opengl(t_scene *scene)
 {
 	build_transformation_matrix(scene->model_matrix,
 								scene->model_transformation);
-	transpose_matrix(scene->tr_model_matrix, scene->model_matrix);
-	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_FALSE,
-						scene->tr_model_matrix);
+	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_TRUE,
+						scene->model_matrix);
 }

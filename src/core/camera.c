@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/20 13:59:43 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 15:22:16 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ void			default_camera(t_camera *camera)
 	camera->tan_half_height = tan(degrees_to_radians(camera->fov / 2));
 	camera->eye = new_vector(0, 0, 10);
 	camera->look_at = new_vector(0, 0, 0);
+	camera->light.position[0] = 5;
+	camera->light.position[1] = 1;
+	camera->light.position[2] = 0;
+	camera->light.colors[0] = 1;
+	camera->light.colors[1] = 1;
+	camera->light.colors[2] = 1;
 	compute_look_at_view_matrix(camera);
 }

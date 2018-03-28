@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/20 14:00:02 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/23 16:59:08 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			initialize_window(t_window *window)
 	SDL_WIDTH = SDL_WIDTH ? SDL_WIDTH : DEFAULT_WINDOW_WIDTH;
 	SDL_HEIGHT = SDL_HEIGHT ? SDL_HEIGHT : DEFAULT_WINDOW_HEIGHT;
 	SDL_DEPTH = 32;
-	SDL_WINDOW = SDL_CreateWindow("ray tracing", 100, 200,
+	SDL_WINDOW = SDL_CreateWindow("Scop", 100, 200,
 	SDL_WIDTH, SDL_HEIGHT, SDL_WINDOW_OPENGL);
 	window->aspect_ratio = (double)SDL_WIDTH / (double)SDL_HEIGHT;
 	window->inverse_aspect_ratio = (double)SDL_HEIGHT / (double)SDL_WIDTH;

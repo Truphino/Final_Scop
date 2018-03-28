@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 12:26:58 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 12:31:21 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/28 12:06:38 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,19 @@ void		vbo_to_vao(GLuint vbo, int row_size, int counter)
 GLuint		setup_vao(t_obj_data *od)
 {
 	GLuint	vao;
-	GLuint	point_vbo;
-	GLuint	colours_vbo;
-	GLuint	texture_vbo;
-	GLuint	normals_vbo;
 
 	vao = 0;
-	point_vbo = bind_buffer_vbo(od->triangle_vertices, od->n_triangle * 9);
-	colours_vbo = bind_buffer_vbo(od->obj_colours, od->n_triangle * 9);
-	texture_vbo = bind_buffer_vbo(od->final_textures, od->n_triangle * 6);
-	normals_vbo = bind_buffer_vbo(od->final_normals, od->n_triangle * 9);
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	vbo_to_vao(point_vbo, 3, 0);
-	vbo_to_vao(colours_vbo, 3, 1);
-	vbo_to_vao(texture_vbo, 2, 2);
-	vbo_to_vao(normals_vbo, 3, 3);
+	vbo_to_vao(bind_buffer_vbo(od->triangle_vertices, od->n_triangle * 9),
+			3, 0);
+	vbo_to_vao(bind_buffer_vbo(od->obj_colours, od->n_triangle * 9),
+			3, 1);
+	vbo_to_vao(bind_buffer_vbo(od->final_textures, od->n_triangle * 6),
+			2, 2);
+	vbo_to_vao(bind_buffer_vbo(od->final_normals, od->n_triangle * 9),
+			3, 3);
+	vbo_to_vao(bind_buffer_vbo(od->explodes_vectors, od->n_triangle * 9),
+			3, 4);
 	return (vao);
 }
