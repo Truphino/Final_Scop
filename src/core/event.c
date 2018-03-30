@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/28 13:04:45 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/30 13:15:03 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,45 @@ static void		handle_keys(t_scene *scene, int key)
 		reset_model(scene);
 	else if (key == SDLK_j || key == SDLK_k)
 		explode_model(scene, key);
+	else if (key == SDLK_p)
+		scene->camera.fps_cam.lock_camera = !scene->camera.fps_cam.lock_camera;
+}
+
+static void		handle_mouse(t_scene *scene, SDL_MouseMotionEvent e)
+{
+	if (!scene->camera.fps_cam.lock_camera)
+	{
+		scene->camera.fps_cam.pitch -= (float)e.yrel / 10;
+		scene->camera.fps_cam.yaw -= (float)e.xrel / 10;
+		if (scene->camera.fps_cam.pitch > 90)
+			scene->camera.fps_cam.pitch = 90;
+		if (scene->camera.fps_cam.pitch < -90)
+			scene->camera.fps_cam.pitch = -90;
+		if (scene->camera.fps_cam.yaw > 90)
+			scene->camera.fps_cam.yaw = 90;
+		if (scene->camera.fps_cam.yaw < -90)
+			scene->camera.fps_cam.yaw = -90;
+		compute_fps_view_matrix(&scene->camera.fps_cam);
+		glUniformMatrix4fv(scene->camera.fps_cam.uni_view_matrix, 1, GL_TRUE,
+				scene->camera.fps_cam.view_matrix);
+	}
+}
+
+int			fps_counter(void)
+{
+	static double		last_time = 0;
+	static int			nb_frames = 0;
+
+	if (last_time == 0)
+		last_time = time(NULL);
+	nb_frames++;
+	if (time(NULL) - last_time > 1)
+	{
+		printf("%f ms/frames\n", 1000.f/(double)nb_frames);
+		nb_frames = 0;
+		last_time += 1.f;
+	}
+	return (1);
 }
 
 void			poll_events(t_scene *scene)
@@ -93,7 +132,7 @@ void			poll_events(t_scene *scene)
 	quit = 0;
 	while (!quit)
 	{
-		while (SDL_PollEvent(&SDL_EVENT))
+		while (fps_counter() && SDL_PollEvent(&SDL_EVENT))
 		{
 			print_loop(scene);
 			if (SDL_EVENT.type == SDL_KEYDOWN)
@@ -106,6 +145,8 @@ void			poll_events(t_scene *scene)
 				}
 				handle_keys(scene, KEY);
 			}
+			if (SDL_EVENT.type == SDL_MOUSEMOTION)
+				handle_mouse(scene, SDL_EVENT.motion);
 		}
 	}
 }

@@ -6,37 +6,19 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 15:22:16 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/30 11:31:18 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-static void		fill_matrix_line(t_vector v, float w, t_matrix matrix)
+void			init_fps_camera(t_fps_camera *fps_cam)
 {
-	matrix[0] = v.x;
-	matrix[1] = v.y;
-	matrix[2] = v.z;
-	matrix[3] = w;
-}
-
-void			compute_look_at_view_matrix(t_camera *camera)
-{
-	t_vector	vx;
-	t_vector	vy;
-	t_vector	vz;
-
-	vz = unit_vector(vector_subtract(camera->eye, camera->look_at));
-	vx = vector_cross(UP_VECTOR, vz);
-	vy = vector_cross(vz, vx);
-	fill_matrix_line(vx, -dot_product(vx, camera->eye),
-			camera->view_matrix + (4 * 0));
-	fill_matrix_line(vy, -dot_product(vy, camera->eye),
-			camera->view_matrix + (4 * 1));
-	fill_matrix_line(vz, -dot_product(vz, camera->eye),
-			camera->view_matrix + (4 * 2));
-	fill_matrix_line(new_vector(0, 0, 0), 1,
-			camera->view_matrix + (4 * 3));
+	fps_cam->pitch = 0;
+	fps_cam->yaw = 0;
+	fps_cam->lock_camera = 1;
+	fps_cam->eye = new_vector(0, 0, 10);
+	compute_fps_view_matrix(fps_cam);
 }
 
 void			default_camera(t_camera *camera)
@@ -51,5 +33,6 @@ void			default_camera(t_camera *camera)
 	camera->light.colors[0] = 1;
 	camera->light.colors[1] = 1;
 	camera->light.colors[2] = 1;
-	compute_look_at_view_matrix(camera);
+	init_fps_camera(&camera->fps_cam);
+	//compute_look_at_view_matrix(camera);
 }

@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/26 14:32:25 by dgaitsgo          #+#    #+#              #
-#    Updated: 2018/03/23 12:32:29 by trecomps         ###   ########.fr        #
+#    Updated: 2018/03/30 10:54:58 by trecomps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_FILES = \
 ./src/matrix/rotation_matrix.c\
 ./src/matrix/screen_space.c\
 ./src/matrix/transformation_matrix.c\
+./src/matrix/view_matrix.c\
 ./src/opengl/load_obj.c\
 ./src/opengl/error_log.c\
 ./src/opengl/exec_log.c\

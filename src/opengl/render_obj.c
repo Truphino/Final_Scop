@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/28 12:01:53 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/30 11:01:38 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void		set_uniform_variables(GLuint shader_programme, t_scene *scene)
 		glGetUniformLocation(shader_programme, "model_matrix");
 	glUniformMatrix4fv(scene->uni_model_matrix, 1, GL_TRUE,
 			scene->model_matrix);
-	scene->camera.uni_view_matrix =
-		glGetUniformLocation(shader_programme, "view_matrix");
-	glUniformMatrix4fv(scene->camera.uni_view_matrix, 1, GL_TRUE,
-			scene->camera.view_matrix);
+	scene->camera.fps_cam.uni_view_matrix =
+		glGetUniformLocation(shader_programme, "fps_view_matrix");
+	glUniformMatrix4fv(scene->camera.fps_cam.uni_view_matrix, 1, GL_TRUE,
+			scene->camera.fps_cam.view_matrix);
 	scene->uni_project_matrix =
 		glGetUniformLocation(shader_programme, "projection_matrix");
 	glUniformMatrix4fv(scene->uni_project_matrix, 1, GL_TRUE,

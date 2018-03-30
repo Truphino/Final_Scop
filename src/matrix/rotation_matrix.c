@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 12:10:51 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/30 10:12:17 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		rotate_z(t_matrix rz, double z)
 }
 
 void		build_rotation_matrix(t_matrix rotation,
-double x, double y, double z)
+					double x, double y, double z)
 {
 	t_matrix	rx;
 	t_matrix	ry;

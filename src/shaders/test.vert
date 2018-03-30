@@ -12,7 +12,7 @@ out vec3 frag_position;
 out vec3 frag_normal;
 
 uniform mat4 model_matrix;
-uniform mat4 view_matrix;
+uniform mat4 fps_view_matrix;
 uniform mat4 projection_matrix;
 uniform vec3 light_position;
 uniform vec3 light_color;
@@ -24,5 +24,5 @@ void main() {
 	frag_normal = vertex_normal;
 	colour = vertex_colour;
 	texture_coord = vertex_texture;
-	gl_Position = projection_matrix * view_matrix * model_matrix * vec4(pos, 1.0);
+	gl_Position = projection_matrix * fps_view_matrix * model_matrix * vec4(pos, 1.0);
 }
