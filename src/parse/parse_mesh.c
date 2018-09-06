@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/22 16:09:16 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:17:51 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void		meta_obj(t_obj_data *od, const int fd)
 			od->n_normals++;
 		if (line[0] == 'v' && line[1] == 't')
 			od->n_textures++;
-		free_if(line);
+		free_if((void **)&line);
 	}
-	free_if(line);
+	free_if((void **)&line);
 }
 
 void		reset_counter(t_obj_data *od)
@@ -87,7 +87,7 @@ void		load_obj(t_obj_data *od, const int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		parse_line(od, line);
-		free_if(line);
+		free_if((void **)&line);
 	}
-	free_if(line);
+	free_if((void **)&line);
 }

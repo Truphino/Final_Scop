@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/30 11:01:38 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:14:50 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void		render_obj(t_scene *scene)
 	GLuint		texture_id;
 
 	win = &scene->window;
-	od = load_object("./object_files/42_texture.obj", scene);
+	od = load_object(scene->obj_file_name, scene);
 	scene->od = od;
-	od->obj_colours = generate_vbo(od);
-	texture_id = load_texture_bmp("./texture/preacher_of_the_night.bmp");
-	vao = setup_vao(od);
-	shader_programme = create_program();
+	if (scene->textures_enabled)
+		texture_id = load_texture_bmp(scene->text_file_name);
+	else
+		od->obj_colours = generate_vbo(od);
+	vao = setup_vao(od, scene->textures_enabled);
+	shader_programme = create_program(scene->textures_enabled);
 	activate_gl_options();
 	free_obj_data(od);
 	glClearColor(0.6, 0.6, 0.8, 1);

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/22 15:01:32 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:21:06 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void					swap(double *a, double *b)
 	*b = c;
 }
 
-void					free_if(void *ptr)
+void					free_if(void **ptr)
 {
-	if (ptr)
-		free(ptr);
+	if (ptr && *ptr)
+		ft_memdel(ptr);
 }
 
 void					free_null_terminated_tab(void **ptr)

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 16:59:11 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:17:25 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ char		*file_to_string(const int fd)
 		{
 			file_as_string = append(file_as_string, line);
 		}
-		free_if(line);
+		free_if((void **)&line);
 		lines++;
 	}
-	free_if(line);
+	free_if((void **)&line);
 	return (lines ? file_as_string : NULL);
 }

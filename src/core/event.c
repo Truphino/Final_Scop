@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/30 13:15:03 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:32:59 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,23 @@ void			explode_model(t_scene *scene, int key)
 	glUniform1f(scene->od->uni_explode_coef, scene->od->explode_coef);
 }
 
+void			scale_model(t_scene *scene, int key)
+{
+	if (key == SDLK_y)
+	{
+		scene->model_transformation.scale.x *= 1.2;
+		scene->model_transformation.scale.y *= 1.2;
+		scene->model_transformation.scale.z *= 1.2;
+	}
+	else if (key == SDLK_u)
+	{
+		scene->model_transformation.scale.x /= 1.2;
+		scene->model_transformation.scale.y /= 1.2;
+		scene->model_transformation.scale.z /= 1.2;
+	}
+	send_model_mt_opengl(scene);
+}
+
 static void		handle_keys(t_scene *scene, int key)
 {
 	if (key == SDLK_RIGHT || key == SDLK_LEFT ||
@@ -77,6 +94,8 @@ static void		handle_keys(t_scene *scene, int key)
 			key == SDLK_w || key == SDLK_s ||
 			key == SDLK_g || key == SDLK_f)
 		translate_model(scene, key);
+	else if (key == SDLK_y || key == SDLK_u)
+		scale_model(scene, key);
 	else if (key == SDLK_o)
 		reset_model(scene);
 	else if (key == SDLK_j || key == SDLK_k)

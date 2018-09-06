@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/28 12:01:07 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 15:01:51 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct				s_scene
 	t_matrix				projection;
 	GLuint					uni_project_matrix;
 	GLuint					uni_model_matrix;
+	char					*obj_file_name;
+	char					*text_file_name;
+	int						textures_enabled;
 }							t_scene;
 
 void						free_null_terminated_tab(void **ptr);
@@ -37,7 +40,7 @@ void						put_image(t_scene *scene);
 void						initialize_scene(t_scene *scene);
 void						poll_events(t_scene *scene);
 void						swap(double *a, double *b);
-void						free_if(void *ptr);
+void						free_if(void **ptr);
 t_range						range(double min, double max);
 void						free_obj_data_mem(t_obj_data *od);
 void						multi_free_4(void *addr1, void *addr2,

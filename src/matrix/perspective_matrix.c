@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/20 13:51:17 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:26:00 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	new_perspective_matrix(t_matrix m,
 	double		z_range;
 
 	z_near = 1.0;
-	z_far = 100.0;
+	z_far = 1000.0;
 	z_range = z_near - z_far;
 	m[0 * 4 + 0] = 1.0f / (fov * aspect_ratio);
 	m[0 * 4 + 1] = 0;

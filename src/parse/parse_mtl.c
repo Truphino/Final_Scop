@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:23:30 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/22 16:04:05 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 14:18:08 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			parse_mtl(t_mtl *mtl, char *filename)
 	while (get_next_line(fd, &line) > 0)
 	{
 		parse_mtl_line(mtl, line);
-		free_if(line);
+		free_if((void **)&line);
 	}
-	free_if(line);
+	free_if((void **)&line);
 }
