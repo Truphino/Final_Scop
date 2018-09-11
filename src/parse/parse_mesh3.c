@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 11:59:12 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 10:00:28 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 15:22:15 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void			push_obj_texture(t_obj_data *od, char *line)
 	od->textures[od->n_textures].z = 0;
 	od->textures[od->n_textures].w = 0;
 	od->n_textures++;
-	multi_free_4(tokens[0], tokens[1], tokens[2], tokens[3]);
-	free(tokens);
+	free_null_terminated_tab((void **)tokens);
 }
 
 void			push_smooth_shading_data(t_obj_data *od, char *line)

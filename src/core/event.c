@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/06 14:32:59 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 16:50:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ static void		rotate_model(t_scene *scene, int key)
 static void		translate_model(t_scene *scene, int key)
 {
 	if (key == SDLK_w)
-		scene->model_transformation.translation.y += 1;
+		scene->model_transformation.translation.y += scene->movement_speed;
 	else if (key == SDLK_s)
-		scene->model_transformation.translation.y -= 1;
+		scene->model_transformation.translation.y -= scene->movement_speed;
 	else if (key == SDLK_a)
-		scene->model_transformation.translation.x -= 1;
+		scene->model_transformation.translation.x -= scene->movement_speed;
 	else if (key == SDLK_d)
-		scene->model_transformation.translation.x += 1;
+		scene->model_transformation.translation.x += scene->movement_speed;
 	else if (key == SDLK_f)
-		scene->model_transformation.translation.z -= 1;
+		scene->model_transformation.translation.z -= scene->movement_speed;
 	else if (key == SDLK_g)
-		scene->model_transformation.translation.z += 1;
+		scene->model_transformation.translation.z += scene->movement_speed;
 	send_model_mt_opengl(scene);
 }
 
@@ -84,6 +84,16 @@ void			scale_model(t_scene *scene, int key)
 	send_model_mt_opengl(scene);
 }
 
+void			change_movement_speed(t_scene *scene, int key)
+{
+	if (key == SDLK_KP_MULTIPLY)
+		scene->movement_speed = 1;
+	else if (key == SDLK_KP_PLUS)
+		scene->movement_speed *= 1.1;
+	else if (key == SDLK_KP_MINUS)
+		scene->movement_speed /= 1.1;
+}
+
 static void		handle_keys(t_scene *scene, int key)
 {
 	if (key == SDLK_RIGHT || key == SDLK_LEFT ||
@@ -102,6 +112,8 @@ static void		handle_keys(t_scene *scene, int key)
 		explode_model(scene, key);
 	else if (key == SDLK_p)
 		scene->camera.fps_cam.lock_camera = !scene->camera.fps_cam.lock_camera;
+	else if(key == SDLK_KP_PLUS || key == SDLK_KP_MINUS || key == SDLK_KP_MULTIPLY)
+		change_movement_speed(scene, key);
 }
 
 static void		handle_mouse(t_scene *scene, SDL_MouseMotionEvent e)

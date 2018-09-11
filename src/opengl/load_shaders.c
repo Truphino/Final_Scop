@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:42:33 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 15:23:09 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 16:59:13 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ char		*load_shader_file(const char *filename)
 		return (NULL);
 	if ((file = file_to_string(fd)) == NULL)
 		return (NULL);
+	ft_putchar('\n');
+	ft_putendl(file);
+	ft_putchar('\n');
 	first_line_len = ft_strlen(first_line);
 	shader_string = (char *)ft_memalloc((first_line_len + ft_strlen(file) + 2) *
 			sizeof(char));

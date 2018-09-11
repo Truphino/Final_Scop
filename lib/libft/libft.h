@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:25:35 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/15 16:56:26 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 15:40:09 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-
-# define BUFF_SIZE 1
+# include "get_next_line.h"
 
 typedef	struct		s_list
 {
@@ -26,16 +25,6 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct		s_gnl
-{
-	int				fd;
-	char			*buff;
-	char			*bsn;
-	struct s_gnl	*right;
-	struct s_gnl	*left;
-}					t_gnl;
-
-int					get_next_line(const int fd, char **line);
 void				ft_double_dimension_free(void **ptr, int d);
 int					ft_abs(int n);
 void				*ft_memset(void *b, int c, size_t len);

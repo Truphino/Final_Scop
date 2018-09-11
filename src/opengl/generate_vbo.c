@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:33:14 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 10:07:39 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 16:32:33 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 
 float		*generate_vbo(t_obj_data *od)
 {
-	float	*vbo;
-	int		i;
-	float	colour;
+	float		*vbo;
+	int			i;
+	t_vector	tmp;
 
 	if ((vbo = (float *)ft_memalloc(sizeof(float) *
 					od->n_triangle * 9)) == NULL)
 		exit(1);
 	i = 0;
-	while (i < od->n_triangle)
+	while (i < od->n_triangle * 3)
 	{
-		colour = ((double)((i * 9) % 10) / 10.f);
-		vbo[i * 9 + 0] = colour;
-		vbo[i * 9 + 1] = colour;
-		vbo[i * 9 + 2] = colour;
-		vbo[i * 9 + 3] = colour;
-		vbo[i * 9 + 4] = colour;
-		vbo[i * 9 + 5] = colour;
-		vbo[i * 9 + 6] = colour;
-		vbo[i * 9 + 7] = colour;
-		vbo[i * 9 + 8] = colour;
+		tmp = vec_abs(unit_vector(new_vector(od->triangle_vertices[i * 3 + 0],
+										od->triangle_vertices[i * 3 + 1],
+										od->triangle_vertices[i * 3 + 2])));
+		if (i % 2)
+		{
+			vbo[i * 3 + 0] = tmp.x;
+			vbo[i * 3 + 1] = tmp.y;
+			vbo[i * 3 + 2] = tmp.z;
+		}
+		else
+		{
+			vbo[i * 3 + 0] = tmp.x + ((1 - tmp.x) / 2);
+			vbo[i * 3 + 1] = tmp.y + ((1 - tmp.y) / 2);
+			vbo[i * 3 + 2] = tmp.z + ((1 - tmp.z) / 2);
+		}
 		i++;
 	}
 	return (vbo);

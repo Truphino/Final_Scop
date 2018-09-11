@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/06 14:17:51 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 15:46:12 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,32 @@ int			get_extension(const char *file_name)
 	exit(0);
 }
 
+int			count_triangle_face(char *line)
+{
+	int		i;
+	int		triangles;
+	char	*tmp;
+
+	i = 0;
+	triangles = 0;
+	tmp = line;
+	while (tmp)
+	{
+		tmp = ft_strchr(tmp, ' ');
+		if (tmp && *tmp)
+			tmp++;
+		if (tmp && ft_isdigit(*tmp))
+			triangles++;
+	}
+	printf("%i\n", triangles);
+	if (triangles == 3)
+		return (1);
+	else if (triangles == 4)
+		return (2);
+	else
+		exit(1);
+}
+
 void		meta_obj(t_obj_data *od, const int fd)
 {
 	char	*line;
@@ -38,7 +64,10 @@ void		meta_obj(t_obj_data *od, const int fd)
 		if (line[0] == 'v' && line[1] == ' ')
 			od->n_vertices++;
 		if (line[0] == 'f' && line[1] == ' ')
+		{
 			od->n_faces++;
+			//od->n_triangle_parse += count_triangle_face(line);
+		}
 		if (line[0] == 'v' && line[1] == 'n')
 			od->n_normals++;
 		if (line[0] == 'v' && line[1] == 't')

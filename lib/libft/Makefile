@@ -6,7 +6,7 @@
 #    By: trecomps <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #   .c \reated: 2016/02/12 21:59:32 by trecomps          #+#    #+#            #
-#    Updated: 2018/01/22 12:34:23 by trecomps         ###   ########.fr        #
+#    Updated: 2018/09/11 15:41:07 by trecomps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ HEADERS = libft.h
 OBS = $(SOURCE:.c=.o)
 
 $(NAME):
-	gcc -c -Wall -Werror -Wextra $(SOURCE) $(HEADERS)
+	gcc -g -c -Wall -Werror -Wextra $(SOURCE) $(HEADERS)
 	ar rc $(NAME) $(OBS)
 
 all: $(NAME)

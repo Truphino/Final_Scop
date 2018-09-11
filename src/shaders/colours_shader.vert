@@ -23,3 +23,4 @@ void main() {
 	colour = vertex_colour;
 	gl_Position = projection_matrix * fps_view_matrix * model_matrix * vec4(pos, 1.0);
 }
+/**/

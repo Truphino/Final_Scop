@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 15:01:51 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/06 16:51:07 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct				s_scene
 	char					*obj_file_name;
 	char					*text_file_name;
 	int						textures_enabled;
+	float					movement_speed;
 }							t_scene;
 
 void						free_null_terminated_tab(void **ptr);

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 14:21:06 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 13:52:43 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ void					free_null_terminated_tab(void **ptr)
 	int		i;
 
 	i = 0;
-	while (ptr[i] != NULL)
+	if (ptr)
 	{
-		free(ptr[i]);
-		ptr[i] = NULL;
-		i++;
+		while (ptr[i] != NULL)
+		{
+			free(ptr[i]);
+			ptr[i] = NULL;
+			i++;
+		}
+		free(ptr);
 	}
-	free(ptr);
 }

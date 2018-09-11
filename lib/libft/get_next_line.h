@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 10:13:30 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/11 17:08:39 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/03/12 10:55:10 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include "libft.h"
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 42
 
 typedef struct		s_gnl
 {
