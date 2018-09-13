@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 16:21:19 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 18:58:37 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "external_headers.h"
 # include "local_headers.h"
+
+typedef struct				s_transition
+{
+	GLuint					uni_enabled;
+	GLuint					uni_time;
+	int						enabled;
+	clock_t					time;
+}							t_transition;
 
 typedef struct				s_scene
 {
@@ -33,6 +41,7 @@ typedef struct				s_scene
 	float					movement_speed;
 	int						texture_enabled;
 	GLuint					uni_tex_enabled;
+	t_transition			transition;
 }							t_scene;
 
 void						free_null_terminated_tab(void **ptr);

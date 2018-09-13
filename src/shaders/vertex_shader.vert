@@ -18,6 +18,8 @@ uniform mat4 projection_matrix;
 uniform vec3 light_position;
 uniform vec3 light_color;
 uniform float explode_coef;
+uniform int transition_enabled;
+uniform double transition_time;
 
 void main() {
 	vec3 pos = vertex_position + (explode_coef * explode_vector);

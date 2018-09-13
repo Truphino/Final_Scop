@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 15:57:18 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 19:19:57 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ void		set_uniform_variables_2(GLuint shader_programme, t_scene *scene)
 	scene->uni_tex_enabled =
 		glGetUniformLocation(shader_programme, "texture_enabled");
 	glUniform1i(scene->uni_tex_enabled, scene->texture_enabled);
+	scene->transition.uni_enabled =
+		glGetUniformLocation(shader_programme, "transition_enabled");
+	glUniform1i(scene->transition.uni_enabled, scene->transition.enabled);
+	scene->transition.uni_time =
+		glGetUniformLocation(shader_programme, "transition_time");
+	glUniform1f(scene->transition.uni_time, scene->transition.time);
 }
 
 void		set_uniform_variables(GLuint shader_programme, t_scene *scene)

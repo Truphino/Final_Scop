@@ -12,6 +12,8 @@ uniform mat4 model_matrix;
 uniform vec3 light_position;
 uniform vec3 light_color;
 uniform int texture_enabled;
+uniform int transition_enabled;
+uniform float transition_time;
 
 void main() {
 	vec4 surface_color;
@@ -22,11 +24,27 @@ void main() {
 	float brightness = max(0.0, dot(normal, surface_to_light));
 	if (texture_enabled == 1)
 	{
-		surface_color = texture(tex, texture_coord);
+		if (transition_enabled == 1)
+		{
+			surface_color = mix(vec4(colour, 1), texture(tex, texture_coord),
+					transition_time);
+		}
+		else
+		{
+			surface_color = texture(tex, texture_coord);
+		}
 	}
 	else
 	{
-		surface_color = vec4(colour, 1);
+		if (transition_enabled == 1)
+		{
+			surface_color = mix(texture(tex, texture_coord), vec4(colour, 1),
+					transition_time);
+		}
+		else
+		{
+			surface_color = vec4(colour, 1);
+		}
 	}
 
 //	frag_colour = vec4(brightness * light_color * surface_color.rgb,
