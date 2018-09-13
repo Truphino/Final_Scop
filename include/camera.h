@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 10:46:45 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/03/30 11:10:46 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 15:25:14 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct
 	float			colors[3];
 }					t_light;
 
-typedef struct
+typedef struct		s_cs_angles
 {
 	float			sin_pitch;
 	float			cos_pitch;
@@ -32,7 +32,7 @@ typedef struct
 	float			cos_yaw;
 }					t_cs_angles;
 
-typedef struct
+typedef struct		s_fps_camera
 {
 	float			pitch;
 	float			yaw;
@@ -43,9 +43,8 @@ typedef struct
 	int				lock_camera;
 }					t_fps_camera;
 
-typedef struct
+typedef struct		s_camera
 {
-	GLuint			uni_view_matrix;
 	t_vector		eye;
 	t_vector		look_at;
 	t_matrix		view_matrix;
@@ -56,6 +55,7 @@ typedef struct
 	GLuint			uni_l_pos;
 	GLuint			uni_l_color;
 	t_fps_camera	fps_cam;
+	GLuint			uni_view_matrix;
 }					t_camera;
 
 void				default_camera(t_camera *camera);

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:42:33 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 14:47:42 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 16:03:06 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ GLuint		create_program(void)
 	GLuint		shader_programme;
 	GLuint		vs;
 	GLuint		fs;
-	const char	*vertex_shader = load_shader_file("./src/shaders/vertex_shader.vert");
-	const char	*fragment_shader = load_shader_file("./src/shaders/fragment_shader.frag");
+	const char	*v_s = load_shader_file("./src/shaders/vertex_shader.vert");
+	const char	*f_s = load_shader_file("./src/shaders/fragment_shader.frag");
 
-	if (fragment_shader == NULL || vertex_shader == NULL)
+	if (f_s == NULL || v_s == NULL)
 	{
 		ft_putendl("Error while loading shader file");
 		exit(1);
 	}
 	vs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vs, 1, &vertex_shader, NULL);
+	glShaderSource(vs, 1, &v_s, NULL);
 	compile_shader_log(vs);
 	fs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fs, 1, &fragment_shader, NULL);
+	glShaderSource(fs, 1, &f_s, NULL);
 	compile_shader_log(fs);
 	shader_programme = glCreateProgram();
 	glAttachShader(shader_programme, fs);

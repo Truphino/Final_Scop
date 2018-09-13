@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/11 18:07:38 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 15:28:49 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ void			default_camera(t_camera *camera)
 	camera->light.colors[1] = 1;
 	camera->light.colors[2] = 1;
 	init_fps_camera(&camera->fps_cam);
-	//compute_look_at_view_matrix(camera);
 }

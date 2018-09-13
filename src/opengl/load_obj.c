@@ -6,13 +6,13 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:32:55 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/28 14:36:04 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 16:34:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-static void			move_symmetry_center(t_scene *scene, t_obj_data *od)
+static void		move_symmetry_center(t_scene *scene, t_obj_data *od)
 {
 	int			i;
 	t_vector	min;
@@ -41,36 +41,8 @@ static void			move_symmetry_center(t_scene *scene, t_obj_data *od)
 				max, vector_const_divide(vector_subtract(max, min), 2)), -1);
 }
 
-void			explode_view(t_obj_data *od, t_scene *scene)
+static void		fill_explode_vector(t_obj_data *od, int i, t_vector res2)
 {
-	int			i;
-	t_vector	v1;
-	t_vector	v2;
-	t_vector	v3;
-	t_vector	v1_v2;
-	t_vector	v1_v3;
-	t_vector	res;
-	t_vector	res2;
-
-	i = 0;
-	while (i < od->n_triangle)
-	{
-	v1 = new_vector(od->triangle_vertices[i * 9 + 0],
-			od->triangle_vertices[i * 9 + 1],
-			od->triangle_vertices[i * 9 + 2]);
-	v2 = new_vector(od->triangle_vertices[i * 9 + 3],
-			od->triangle_vertices[i * 9 + 4],
-			od->triangle_vertices[i * 9 + 5]);
-	v3 = new_vector(od->triangle_vertices[i * 9 + 6],
-			od->triangle_vertices[i * 9 + 7],
-			od->triangle_vertices[i * 9 + 8]);
-	v1_v2 = vector_subtract(v2, v1);
-	v1_v3 = vector_subtract(v3, v1);
-	res = vector_inverse_scale(vector_add(v1_v2, v1_v3), 3);
-	res2 = vector_add(res, v1);
-	res2 = vector_add(res2, scene->model_transformation.pr_translation);
-
-	res2 = vector_scale(res2, 2);
 	od->explodes_vectors[i * 9 + 0] += res2.x;
 	od->explodes_vectors[i * 9 + 1] += res2.y;
 	od->explodes_vectors[i * 9 + 2] += res2.z;
@@ -80,11 +52,45 @@ void			explode_view(t_obj_data *od, t_scene *scene)
 	od->explodes_vectors[i * 9 + 6] += res2.x;
 	od->explodes_vectors[i * 9 + 7] += res2.y;
 	od->explodes_vectors[i * 9 + 8] += res2.z;
-	i++;
+}
+
+t_vector		extract_vector(t_obj_data *od, int i, int offset)
+{
+	t_vector	tmp;
+
+	offset *= 3;
+	tmp = new_vector(od->triangle_vertices[i * 9 + 0 + offset],
+			od->triangle_vertices[i * 9 + 1 + offset],
+			od->triangle_vertices[i * 9 + 2 + offset]);
+	return (tmp);
+}
+
+void			explode_view(t_obj_data *od, t_scene *scene)
+{
+	int			i;
+	t_vector	v[3];
+	t_vector	v0_v1;
+	t_vector	v0_v2;
+	t_vector	res;
+
+	i = 0;
+	while (i < od->n_triangle)
+	{
+		v[0] = extract_vector(od, i, 0);
+		v[1] = extract_vector(od, i, 1);
+		v[2] = extract_vector(od, i, 2);
+		v0_v1 = vector_subtract(v[1], v[0]);
+		v0_v2 = vector_subtract(v[2], v[0]);
+		res = vector_inverse_scale(vector_add(v0_v1, v0_v2), 3);
+		res = vector_add(res, v[0]);
+		res = vector_add(res, scene->model_transformation.pr_translation);
+		res = vector_scale(res, 2);
+		fill_explode_vector(od, i, res);
+		i++;
 	}
 }
 
-t_obj_data			*load_object(char *filename, t_scene *scene)
+t_obj_data		*load_object(char *filename, t_scene *scene)
 {
 	t_obj_data	*obj;
 

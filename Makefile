@@ -6,7 +6,7 @@
 #    By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/26 14:32:25 by dgaitsgo          #+#    #+#              #
-#    Updated: 2018/09/13 11:21:03 by trecomps         ###   ########.fr        #
+#    Updated: 2018/09/13 16:22:33 by trecomps         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC_FILES = \
 ./src/core/helpers2.c\
 ./src/core/helpers.c\
 ./src/core/event_tool.c\
+./src/core/event_transform_model.c\
+./src/core/user_interaction_event.c\
 ./src/matrix/copy_matrix.c\
 ./src/matrix/inverse_rotation_matrix.c\
 ./src/matrix/inverse_transformations.c\

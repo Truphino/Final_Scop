@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:04:33 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/06 16:19:38 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 15:52:37 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ t_vector	vec_abs(t_vector a)
 	tmp.x = fabs(a.x);
 	tmp.y = fabs(a.y);
 	tmp.z = fabs(a.z);
-
 	return (tmp);
 }

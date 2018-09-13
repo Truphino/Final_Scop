@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/30 10:12:17 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 17:32:27 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void		build_rotation_matrix(t_matrix rotation,
 	rotate_x(rx, degrees_to_radians(x));
 	rotate_y(ry, degrees_to_radians(y));
 	rotate_z(rz, degrees_to_radians(z));
-	matrix_multiply(res, ry, rx);
-	matrix_multiply(rotation, rz, res);
+	matrix_multiply(res, rz, ry);
+	matrix_multiply(rotation, rx, res);
 }
