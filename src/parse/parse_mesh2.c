@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:15:15 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/11 16:16:57 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 18:15:07 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void		fetch_obj_data_mem(t_obj_data *od)
 	od->vertices = malloc(sizeof(t_vector) * od->n_vertices);
 	od->normals = malloc(sizeof(t_vector) * od->n_normals);
 	od->textures = malloc(sizeof(t_vector) * od->n_textures);
-//	od->triangles_indexes = malloc(sizeof(int) * od->n_triangle_parse * 3);
-//	ft_memset(od->triangles_indexes, -1, od->n_triangle_parse * 3 * sizeof(int));
 	od->face_indexes = malloc(sizeof(int) * od->n_faces * 4);
 	od->texture_indexes = malloc(sizeof(int) * od->n_faces * 4);
 	od->normal_indexes = malloc(sizeof(int) * od->n_faces * 4);

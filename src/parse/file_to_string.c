@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/11 17:03:54 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/11 17:14:00 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char		*file_to_string(const int fd)
 	file_as_string[0] = '\0';
 	while ((r = get_next_line(fd, &line)) > 0)
 	{
-		ft_putendl(line);
 		if (!only_spaces(line) && !in_comments(line))
 		{
 			file_as_string = append(file_as_string, line);

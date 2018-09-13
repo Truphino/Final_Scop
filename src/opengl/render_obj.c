@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 15:14:50 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 14:57:54 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void		set_uniform_variables(GLuint shader_programme, t_scene *scene)
 	scene->od->uni_explode_coef =
 		glGetUniformLocation(shader_programme, "explode_coef");
 	glUniform1f(scene->od->uni_explode_coef, scene->od->explode_coef);
+	scene->uni_tex_enabled =
+		glGetUniformLocation(shader_programme, "texture_enabled");
+	glUniform1i(scene->uni_tex_enabled, scene->texture_enabled);
 }
 
 void		render_obj(t_scene *scene)
@@ -50,19 +53,16 @@ void		render_obj(t_scene *scene)
 	win = &scene->window;
 	od = load_object(scene->obj_file_name, scene);
 	scene->od = od;
-	if (scene->textures_enabled)
-		texture_id = load_texture_bmp(scene->text_file_name);
-	else
-		od->obj_colours = generate_vbo(od);
-	vao = setup_vao(od, scene->textures_enabled);
-	shader_programme = create_program(scene->textures_enabled);
+	texture_id = load_texture_bmp(scene->text_file_name);
+	od->obj_colours = generate_vbo(od);
+	vao = setup_vao(od);
+	shader_programme = create_program();
 	activate_gl_options();
 	free_obj_data(od);
 	glClearColor(0.6, 0.6, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shader_programme);
 	set_uniform_variables(shader_programme, scene);
-	glUniform1i(glGetUniformLocation(shader_programme, "tex"), 0);
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, od->n_triangle * 3);
 	SDL_GL_SwapWindow(win->window);

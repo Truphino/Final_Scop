@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/06 16:50:42 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 15:05:52 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,15 @@ void			change_movement_speed(t_scene *scene, int key)
 		scene->movement_speed /= 1.1;
 }
 
+void			switch_texture_colours(t_scene *scene, int key)
+{
+	if (key == SDLK_t)
+	{
+		scene->texture_enabled = !scene->texture_enabled;
+	}
+	glUniform1i(scene->uni_tex_enabled, scene->texture_enabled);
+}
+
 static void		handle_keys(t_scene *scene, int key)
 {
 	if (key == SDLK_RIGHT || key == SDLK_LEFT ||
@@ -114,6 +123,8 @@ static void		handle_keys(t_scene *scene, int key)
 		scene->camera.fps_cam.lock_camera = !scene->camera.fps_cam.lock_camera;
 	else if(key == SDLK_KP_PLUS || key == SDLK_KP_MINUS || key == SDLK_KP_MULTIPLY)
 		change_movement_speed(scene, key);
+	else if (key == SDLK_t)
+		switch_texture_colours(scene, key);
 }
 
 static void		handle_mouse(t_scene *scene, SDL_MouseMotionEvent e)

@@ -3,96 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: trecomps <trecomps@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/27 20:31:02 by trecomps          #+#    #+#             */
-/*   Updated: 2018/01/22 12:34:37 by trecomps         ###   ########.fr       */
+/*   Created: 2015/12/17 09:37:23 by trecomps          #+#    #+#             */
+/*   Updated: 2015/12/28 14:03:07 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char		*fill_line(char *line, char *ex_buff)
+int					len_l(char *buf)
 {
-	char	*temp;
-	int		i;
+	int				i;
 
 	i = 0;
-	temp = NULL;
-	while (ex_buff[i] != '\n' && ex_buff[i] != '\0')
+	if (!buf)
+		return (-1);
+	while (buf[i] && buf[i] != '\n')
 		i++;
-	if (!(temp = ft_memalloc(i + ft_strlen(line))))
+	if (buf[i] == '\n')
+		return (i + 1);
+	return (-1);
+}
+
+char				*take_one(char *buf)
+{
+	int				i;
+	char			*str;
+	int				len;
+
+	i = 0;
+	len = len_l(buf) - 1;
+	if (len < 0)
 		return (NULL);
-	ft_strcat(temp, line);
-	ft_strncat(temp, ex_buff, i);
-	return (temp);
+	if ((str = (char *)ft_memalloc(len + 1)) == NULL)
+		return (NULL);
+	if (len == 0)
+		return (str);
+	str = ft_strncpy(str, buf, len);
+	return (str);
 }
 
-static void	multi_fd(t_gnl **gnl, int fd)
+char				*rm_one_line(char *buf, int len)
 {
-	t_gnl *temp;
+	char			*tmp;
 
-	temp = *gnl;
-	(*gnl)->right = ft_memalloc(sizeof(t_gnl));
-	*gnl = (*gnl)->right;
-	(*gnl)->buff = ft_memalloc(BUFF_SIZE + 1);
-	(*gnl)->fd = fd;
-	(*gnl)->bsn = NULL;
-	(*gnl)->right = NULL;
-	(*gnl)->left = temp;
+	if ((tmp = ft_strdup(buf + len)) == NULL)
+		return (NULL);
+	free(buf);
+	buf = tmp;
+	return (buf);
 }
 
-static int	gnl_mem(char **line, t_gnl **gnl, int fd)
+int					read_it(char **buf, int fd)
 {
-	if (!(*line = malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		return (0);
-	ft_memset(*line, 0, BUFF_SIZE + 1);
-	if (!*gnl)
+	char			*tmp;
+	int				re;
+
+	while (len_l(*buf) < 1)
 	{
-		if (!(*gnl = ft_memalloc(sizeof(t_gnl))))
-			return (0);
-		if (!((*gnl)->buff = ft_memalloc(BUFF_SIZE + 1)))
-			return (0);
-		(*gnl)->fd = fd;
-		(*gnl)->bsn = NULL;
-		(*gnl)->left = NULL;
-		(*gnl)->right = NULL;
-		return (1);
+		if ((tmp = (char *)ft_memalloc(BUFF_SIZE + 1)) == NULL)
+			return (-1);
+		re = read(fd, tmp, BUFF_SIZE);
+		if (re == -1 || re == 0)
+			return (re);
+		*buf = ft_strjoin(*buf, tmp);
+		free(tmp);
 	}
-	while ((*gnl)->left && (*gnl)->fd != fd)
-		*gnl = (*gnl)->left;
-	while ((*gnl)->right && (*gnl)->fd != fd)
-		*gnl = (*gnl)->right;
-	if (fd != (*gnl)->fd)
-		multi_fd(gnl, fd);
 	return (1);
 }
 
-int			get_next_line(const int fd, char **line)
+int					get_next_line(int fd, char **line)
 {
-	static t_gnl	*gnl;
-	int				ret;
+	static char		*buf = NULL;
+	int				re;
 
-	if ((fd < 0) || (!line))
+	if (!line)
 		return (-1);
-	if (gnl_mem(line, &gnl, fd) != 1)
-		return (-1);
-	while (gnl->bsn || (ret = read(fd, gnl->buff, BUFF_SIZE)))
-	{
-		if (gnl->bsn && (*line = fill_line(*line, gnl->bsn + 1)))
-		{
-			if ((gnl->bsn = ft_strchr(gnl->bsn + 1, '\n')) != NULL)
-				return (1);
-			ret = read(fd, gnl->buff, BUFF_SIZE);
-		}
-		if (ret < 0)
+	if (!buf)
+		if ((buf = (char *)ft_memalloc(1)) == NULL)
 			return (-1);
-		gnl->buff[ret] = '\0';
-		*line = fill_line(*line, gnl->buff);
-		if (*line == NULL)
-			return (0);
-		if ((gnl->bsn = ft_strchr(gnl->buff, '\n')) != NULL)
+	if ((*line = take_one(buf)) == NULL)
+	{
+		if ((re = read_it(&buf, fd)) == 0 && ft_strlen(buf) > 0)
+		{
+			*line = ft_strdup(buf);
+			*buf = '\0';
 			return (1);
+		}
+		if ((re == 0 && ft_strlen(buf) == 0) || re == -1)
+			return (re);
+		*line = take_one(buf);
 	}
-	return (ret || **line ? 1 : 0);
+	buf = rm_one_line(buf, len_l(buf));
+	return (1);
 }

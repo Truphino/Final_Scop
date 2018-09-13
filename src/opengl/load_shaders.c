@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:42:33 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/11 16:59:13 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/13 14:47:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ char		*load_shader_file(const char *filename)
 		return (NULL);
 	if ((file = file_to_string(fd)) == NULL)
 		return (NULL);
-	ft_putchar('\n');
-	ft_putendl(file);
-	ft_putchar('\n');
 	first_line_len = ft_strlen(first_line);
 	shader_string = (char *)ft_memalloc((first_line_len + ft_strlen(file) + 2) *
 			sizeof(char));
@@ -42,29 +39,13 @@ char		*load_shader_file(const char *filename)
 	return (shader_string);
 }
 
-const char		*select_vert_files(int textures_enabled)
-{
-	if (textures_enabled)
-		return ("./src/shaders/textures_shader.vert");
-	else
-		return ("./src/shaders/colours_shader.vert");
-}
-
-const char		*select_frag_files(int textures_enabled)
-{
-	if (textures_enabled)
-		return ("./src/shaders/textures_shader.frag");
-	else
-		return ("./src/shaders/colours_shader.frag");
-}
-
-GLuint		create_program(int textures_enabled)
+GLuint		create_program(void)
 {
 	GLuint		shader_programme;
 	GLuint		vs;
 	GLuint		fs;
-	const char	*vertex_shader = load_shader_file(select_vert_files(textures_enabled));
-	const char	*fragment_shader = load_shader_file(select_frag_files(textures_enabled));
+	const char	*vertex_shader = load_shader_file("./src/shaders/vertex_shader.vert");
+	const char	*fragment_shader = load_shader_file("./src/shaders/fragment_shader.frag");
 
 	if (fragment_shader == NULL || vertex_shader == NULL)
 	{
