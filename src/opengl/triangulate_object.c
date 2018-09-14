@@ -6,40 +6,22 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:32:10 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 14:49:41 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:16:44 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-static int		calcutate_triangle(t_obj_data *od)
-{
-	int		i;
-	int		n_triangle;
-
-	i = 0;
-	n_triangle = 0;
-	while (i < od->n_faces)
-	{
-		if (od->face_indexes[i * 4 + 3] != -1)
-			n_triangle += 2;
-		else
-			n_triangle += 1;
-		i++;
-	}
-	return (n_triangle);
-}
-
 void			fetch_memory_od(t_obj_data *od)
 {
 	od->explodes_vectors = (float *)ft_memalloc(sizeof(float) *
-			od->n_triangle * 9);
+			od->n_triangles * 9);
 	od->triangle_vertices = (float *)ft_memalloc(sizeof(float) *
-			od->n_triangle * 9);
+			od->n_triangles * 9);
 	od->final_normals = (float *)ft_memalloc(sizeof(float) *
-			od->n_triangle * 9);
+			od->n_triangles * 9);
 	od->final_textures = (float *)ft_memalloc(sizeof(float) *
-			od->n_triangle * 6);
+			od->n_triangles * 6);
 	if (od->final_normals == NULL ||
 			od->final_textures == NULL ||
 			od->explodes_vectors == NULL ||
@@ -50,21 +32,12 @@ void			fetch_memory_od(t_obj_data *od)
 void			triangulate_obj(t_obj_data *od)
 {
 	int		i;
-	int		j;
 
-	od->n_triangle = calcutate_triangle(od);
 	fetch_memory_od(od);
 	i = 0;
-	j = 0;
-	while (i < od->n_faces)
+	while (i < od->n_triangles)
 	{
-		load_all(od, i, j, 0);
-		if (od->face_indexes[i * 4 + 3] != -1)
-		{
-			j++;
-			load_all(od, i, j, 1);
-		}
-		j++;
+		load_all(od, i);
 		i++;
 	}
 	if (od->n_normals <= 0)

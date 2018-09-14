@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 12:23:19 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 14:43:22 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:12:06 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ GLuint			load_texture_bmp(const char *filename);
 GLuint			load_texture_bmp_cubemap(const char *filename);
 void			load_normals(t_obj_data *od);
 void			load_compute_normals(t_obj_data *od);
-void			load_all(t_obj_data *od, int i, int j, int j_offset);
+void			load_all(t_obj_data *od, int i);
 void			activate_gl_options();
 GLuint			setup_vao(t_obj_data *od);
 

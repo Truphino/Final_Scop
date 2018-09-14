@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 12:16:02 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/30 12:41:22 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:49:10 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		print_loop(t_scene *scene)
 
 	window = &scene->window;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDrawArrays(GL_TRIANGLES, 0, scene->od->n_triangle * 3);
+	glDrawArrays(GL_TRIANGLES, 0, scene->od->n_triangles * 3);
 	SDL_GL_SwapWindow(SDL_WINDOW);
 }
 

@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:47:53 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 14:16:46 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:15:50 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			free_obj_data(t_obj_data *od)
 	free_if((void **)&od->vertices);
 	free_if((void **)&od->normals);
 	free_if((void **)&od->textures);
-	free_if((void **)&od->face_indexes);
+	free_if((void **)&od->vertex_indexes);
 	free_if((void **)&od->texture_indexes);
 	free_if((void **)&od->normal_indexes);
 }

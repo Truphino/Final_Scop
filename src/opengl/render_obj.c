@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:23:05 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 19:19:57 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:50:44 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void		render_obj(t_scene *scene)
 	glUseProgram(shader_programme);
 	set_uniform_variables(shader_programme, scene);
 	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, od->n_triangle * 3);
+	glDrawArrays(GL_TRIANGLES, 0, od->n_triangles * 3);
 	SDL_GL_SwapWindow(win->window);
 }

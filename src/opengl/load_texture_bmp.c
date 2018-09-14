@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 10:46:56 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 12:34:10 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:59:47 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,6 @@ t_bmp_parser	parse_texture_bmp(const char *filename)
 	read(fd, bmp_p.bmp_data, bmp_p.image_size);
 	close(fd);
 	return (bmp_p);
-}
-
-void			print_texture(t_bmp_parser bmp_p)
-{
-	int			i;
-
-	i = bmp_p.image_size;
-	printf("Data offset: %i\nWidth: %i\nHeight: %i\nImage Size: %i\n",
-			bmp_p.data_offset, bmp_p.width, bmp_p.height, bmp_p.image_size);
-	while (i < bmp_p.image_size)
-	{
-		printf("%u\t%u\t%u\n",
-				bmp_p.bmp_data[i],
-				bmp_p.bmp_data[i + 1],
-				bmp_p.bmp_data[i + 2]);
-		i += 3;
-	}
 }
 
 GLuint			load_texture_bmp(const char *filename)

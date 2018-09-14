@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/14 11:35:52 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:24:04 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct				s_scene
 	t_transition			transition;
 }							t_scene;
 
+char						*custrim(char *str);
 void						free_null_terminated_tab(void **ptr);
 void						kill_sdl(t_scene *scene, char *str, int fd);
 void						render_obj(t_scene *scene);

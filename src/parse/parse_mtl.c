@@ -6,28 +6,11 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 15:23:30 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 14:18:08 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 12:00:16 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
-
-void			print_3_float(char *message, float tab[3])
-{
-	printf("%s%f\t%f\t%f\n", message, tab[0], tab[1], tab[2]);
-}
-
-void			print_mtl(t_mtl mtl)
-{
-	printf("newmtl: %s\n", mtl.name);
-	printf("Ns: %f\n", mtl.specular_exponent);
-	print_3_float("Ka: ", mtl.ambient_color);
-	print_3_float("Kd: ", mtl.diffuse_color);
-	print_3_float("Ks: ", mtl.specular_color);
-	printf("Ni: %f\n", mtl.optical_density);
-	printf("d: %f\n", mtl.transparency);
-	printf("illum: %i\n", mtl.illumination_model);
-}
 
 void			load_3_float(float tab[3], char *line)
 {

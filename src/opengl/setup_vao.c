@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 12:26:58 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 14:48:43 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:16:55 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ GLuint		setup_vao(t_obj_data *od)
 	vao = 0;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	vbo_to_vao(bind_buffer_vbo(od->triangle_vertices, od->n_triangle * 9),
+	vbo_to_vao(bind_buffer_vbo(od->triangle_vertices, od->n_triangles * 9),
 			3, 0);
-	vbo_to_vao(bind_buffer_vbo(od->final_normals, od->n_triangle * 9),
+	vbo_to_vao(bind_buffer_vbo(od->final_normals, od->n_triangles * 9),
 			3, 1);
-	vbo_to_vao(bind_buffer_vbo(od->explodes_vectors, od->n_triangle * 9),
+	vbo_to_vao(bind_buffer_vbo(od->explodes_vectors, od->n_triangles * 9),
 			3, 2);
-	vbo_to_vao(bind_buffer_vbo(od->final_textures, od->n_triangle * 6),
+	vbo_to_vao(bind_buffer_vbo(od->final_textures, od->n_triangles * 6),
 			2, 3);
-	vbo_to_vao(bind_buffer_vbo(od->obj_colours, od->n_triangle * 9),
+	vbo_to_vao(bind_buffer_vbo(od->obj_colours, od->n_triangles * 9),
 			3, 4);
 	return (vao);
 }

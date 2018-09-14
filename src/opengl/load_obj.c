@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:32:55 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 16:34:42 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:49:59 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			explode_view(t_obj_data *od, t_scene *scene)
 	t_vector	res;
 
 	i = 0;
-	while (i < od->n_triangle)
+	while (i < od->n_triangles)
 	{
 		v[0] = extract_vector(od, i, 0);
 		v[1] = extract_vector(od, i, 1);

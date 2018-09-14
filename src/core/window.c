@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:16:32 by trecomps          #+#    #+#             */
-/*   Updated: 2018/03/23 16:59:08 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:58:37 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			initialize_window(t_window *window)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		printf("Coundn't init sdl\n");
+		ft_putendl("Coundn't init sdl");
 	init_opengl();
 	SDL_WIDTH = SDL_WIDTH ? SDL_WIDTH : DEFAULT_WINDOW_WIDTH;
 	SDL_HEIGHT = SDL_HEIGHT ? SDL_HEIGHT : DEFAULT_WINDOW_HEIGHT;
@@ -25,7 +25,7 @@ void			initialize_window(t_window *window)
 	window->aspect_ratio = (double)SDL_WIDTH / (double)SDL_HEIGHT;
 	window->inverse_aspect_ratio = (double)SDL_HEIGHT / (double)SDL_WIDTH;
 	if ((window->gl_context = SDL_GL_CreateContext(SDL_WINDOW)) == NULL)
-		printf("Cannot init gl context\n");
+		ft_putendl("Cannot init gl context");
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{

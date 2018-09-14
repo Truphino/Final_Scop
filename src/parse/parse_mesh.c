@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/13 12:09:23 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:46:47 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ int			get_extension(const char *file_name)
 	exit(0);
 }
 
+int			face_count_triangles(char *line)
+{
+	int		i;
+	char	**split;
+
+	i = 1;
+	split = ft_strsplit(line, ' ');
+	while (split[i])
+		i++;
+	i -= 1;
+	i -= 2;
+	free_null_terminated_tab((void **)split);
+	return (i);
+}
+
 void		meta_obj(t_obj_data *od, const int fd)
 {
 	char	*line;
@@ -38,7 +53,7 @@ void		meta_obj(t_obj_data *od, const int fd)
 		if (line[0] == 'v' && line[1] == ' ')
 			od->n_vertices++;
 		else if (line[0] == 'f' && line[1] == ' ')
-			od->n_faces++;
+			od->n_triangles += face_count_triangles(line);
 		else if (line[0] == 'v' && line[1] == 'n')
 			od->n_normals++;
 		else if (line[0] == 'v' && line[1] == 't')
@@ -52,9 +67,8 @@ void		reset_counter(t_obj_data *od)
 {
 	od->n_vertices = 0;
 	od->n_normals = 0;
-	od->n_normal_indexes = 0;
-	od->n_faces = 0;
 	od->n_textures = 0;
+	od->n_triangles = 0;
 }
 
 void		load_mesh(t_obj_data *od, char *file_name)
@@ -80,13 +94,16 @@ void		load_mesh(t_obj_data *od, char *file_name)
 void		load_obj(t_obj_data *od, const int fd)
 {
 	char	*line;
+	char	*trim;
 
 	line = NULL;
 	fetch_obj_data_mem(od);
 	reset_counter(od);
 	while (get_next_line(fd, &line) > 0)
 	{
-		parse_line(od, line);
+		trim = custrim(line);
+		parse_line(od, trim);
+		free_if((void **)&trim);
 		free_if((void **)&line);
 	}
 	free_if((void **)&line);

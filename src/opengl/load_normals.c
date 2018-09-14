@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 17:58:22 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/06 14:17:06 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 15:15:30 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		load_compute_normals(t_obj_data *od)
 
 	i = 0;
 	free_if((void **)&od->normals);
-	while (i < od->n_triangle)
+	while (i < od->n_triangles)
 	{
 		compute_normals(od, i);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 11:23:41 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/11 18:15:03 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:31:47 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ typedef struct	s_obj_data
 	t_vector	*vertices;
 	t_vector	*normals;
 	t_vector	*textures;
-	int			*face_indexes;
+	int			*vertex_indexes;
 	int			*texture_indexes;
 	int			*normal_indexes;
-	int			n_normal_indexes;
 	int			n_vertices;
 	int			n_normals;
 	int			n_textures;
-	int			n_faces;
-	int			n_triangle;
+	int			n_triangles;
 	GLuint		uni_text;
 	GLuint		smooth_shading;
 	float		*explodes_vectors;

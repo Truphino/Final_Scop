@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 13:33:14 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 15:33:50 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:50:30 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ float		*generate_vbo(t_obj_data *od)
 	t_vector	tmp;
 
 	if ((vbo = (float *)ft_memalloc(sizeof(float) *
-					od->n_triangle * 9)) == NULL)
+					od->n_triangles * 9)) == NULL)
 		exit(1);
 	i = 0;
-	while (i < od->n_triangle * 3)
+	while (i < od->n_triangles * 3)
 	{
 		tmp = vec_abs(unit_vector(new_vector(od->triangle_vertices[i * 3 + 0],
 										od->triangle_vertices[i * 3 + 1],
@@ -54,7 +54,7 @@ void		generate_texture_vbo(t_obj_data *od)
 	int		i;
 
 	i = 0;
-	while (i < od->n_triangle)
+	while (i < od->n_triangles)
 	{
 		od->final_textures[i * 6 + 0] = 0;
 		od->final_textures[i * 6 + 1] = 0;
