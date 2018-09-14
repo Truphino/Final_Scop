@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 16:18:34 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 19:16:18 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:40:08 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,31 @@ void			change_movement_speed(t_scene *scene, int key)
 		scene->movement_speed /= 1.1;
 }
 
+void			change_transition_speed(t_scene *scene, int key)
+{
+	if (key == SDLK_x)
+		scene->transition.speed += 100;
+	else if (key == SDLK_c)
+	{
+		if (scene->transition.speed > 100)
+			scene->transition.speed -= 100;
+	}
+}
+
 void			switch_texture_colours(t_scene *scene, int key)
 {
-	if (key == SDLK_t)
+	if (scene->transition.enabled == 0)
 	{
-		scene->texture_enabled = !scene->texture_enabled;
-		scene->transition.enabled = 1;
-		scene->transition.time = clock();
+		if (key == SDLK_t)
+		{
+			scene->texture_enabled = !scene->texture_enabled;
+			scene->transition.enabled = 1;
+			scene->transition.time = clock();
+		}
+		glUniform1i(scene->uni_tex_enabled, scene->texture_enabled);
+		glUniform1i(scene->transition.uni_enabled, scene->transition.enabled);
+		glUniform1d(scene->transition.uni_time, 0);
 	}
-	glUniform1i(scene->uni_tex_enabled, scene->texture_enabled);
-	glUniform1i(scene->transition.uni_enabled, scene->transition.enabled);
-	glUniform1d(scene->transition.uni_time, 0);
 }
 
 void			handle_keys(t_scene *scene, int key)
@@ -58,6 +72,8 @@ void			handle_keys(t_scene *scene, int key)
 		change_movement_speed(scene, key);
 	else if (key == SDLK_t)
 		switch_texture_colours(scene, key);
+	else if (key == SDLK_x || key == SDLK_c)
+		change_transition_speed(scene, key);
 }
 
 void			handle_mouse(t_scene *scene, SDL_MouseMotionEvent e)

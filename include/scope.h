@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 14:18:48 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 18:58:37 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:35:52 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct				s_transition
 	GLuint					uni_time;
 	int						enabled;
 	clock_t					time;
+	int						speed;
 }							t_transition;
 
 typedef struct				s_scene

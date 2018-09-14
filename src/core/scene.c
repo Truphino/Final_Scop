@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 18:55:28 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/13 18:23:44 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:29:58 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	initialize_scene(t_scene *scene)
 	scene->movement_speed = 1;
 	scene->transition.enabled = 0;
 	scene->transition.time = 0;
+	scene->transition.speed = 100;
 	default_transformation(&scene->model_transformation);
 	scene->model_transformation.translation = new_vector(0, 0, -5);
 	scene->model_transformation.rotation.z += 0;

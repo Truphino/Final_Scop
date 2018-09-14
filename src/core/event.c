@@ -6,30 +6,13 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 18:49:24 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/13 19:27:08 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/14 11:51:42 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
 
-int			fps_counter(void)
-{
-	static double		last_time = 0;
-	static int			nb_frames = 0;
-
-	if (last_time == 0)
-		last_time = time(NULL);
-	nb_frames++;
-	if (time(NULL) - last_time > 1)
-	{
-		printf("%f ms/frames\n", 1000.f/(double)nb_frames);
-		nb_frames = 0;
-		last_time += 1.f;
-	}
-	return (1);
-}
-
-int			transition_time(t_scene *scene)
+int				transition_time(t_scene *scene)
 {
 	clock_t		stop;
 	double		ellapsed_time;
@@ -37,8 +20,9 @@ int			transition_time(t_scene *scene)
 	if (scene->transition.enabled)
 	{
 		stop = clock();
-		ellapsed_time = (double)(stop - scene->transition.time) / CLOCKS_PER_SEC;
-		if (ellapsed_time > .01f)
+		ellapsed_time = (double)(stop - scene->transition.time)
+								/ CLOCKS_PER_SEC;
+		if (ellapsed_time > 1.f / (double)scene->transition.speed)
 		{
 			scene->transition.time = 0;
 			scene->transition.enabled = 0;
@@ -46,9 +30,25 @@ int			transition_time(t_scene *scene)
 						scene->transition.enabled);
 		}
 		else
-			glUniform1f(scene->transition.uni_time, ellapsed_time * 100);
+			glUniform1f(scene->transition.uni_time,
+							ellapsed_time * (double)scene->transition.speed);
 	}
 	return (1);
+}
+
+int				sdl_event_keydown(t_scene *scene, t_window *window)
+{
+	int			quit;
+
+	quit = 0;
+	if (SDL_EVENT.type == SDL_QUIT ||
+			KEY == SDLK_ESCAPE)
+	{
+		quit = 1;
+		kill_sdl(scene, "", 2);
+	}
+	handle_keys(scene, KEY);
+	return (quit);
 }
 
 void			poll_events(t_scene *scene)
@@ -61,21 +61,13 @@ void			poll_events(t_scene *scene)
 	quit = 0;
 	while (!quit)
 	{
-		while (transition_time(scene) && SDL_PollEvent(&SDL_EVENT))
+		while (SDL_PollEvent(&SDL_EVENT))
 		{
-			if (SDL_EVENT.type == SDL_KEYDOWN)
-			{
-				if (SDL_EVENT.type == SDL_QUIT ||
-					KEY == SDLK_ESCAPE)
-				{
-					quit = 1;
-					kill_sdl(scene, "", 2);
-				}
-				handle_keys(scene, KEY);
-			}
+			quit = sdl_event_keydown(scene, window);
 			if (SDL_EVENT.type == SDL_MOUSEMOTION)
 				handle_mouse(scene, SDL_EVENT.motion);
 		}
+		transition_time(scene);
 		print_loop(scene);
 	}
 }
