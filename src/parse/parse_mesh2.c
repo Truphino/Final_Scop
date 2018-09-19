@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:15:15 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/14 15:31:37 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:12:17 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ void		load_subfield(t_obj_data *od, char *tokens, int pos)
 
 	i = 0;
 	tmp = tokens;
-//	printf("token: %s\n", tokens);
-//	printf("n_triangles: %i\n", od->n_triangles);
-//	printf("pos: %i\n", pos);
 	while (i < 3 && tmp)
 	{
 		if (i == 0)
@@ -81,11 +78,9 @@ void		push_obj_face_data(t_obj_data *od, char *line)
 	char	**tokens;
 
 	i = 1;
-//	printf("%s\n", line);
 	tokens = ft_strsplit(line, ' ');
 	while (tokens && tokens[0] && tokens[i])
 	{
-//		printf("i: %i\n", i);
 		if (i <= 3)
 			load_subfield(od, tokens[i], i - 1);
 		if (i > 3)
@@ -98,6 +93,5 @@ void		push_obj_face_data(t_obj_data *od, char *line)
 			od->n_triangles++;
 		i++;
 	}
-//	printf("\n\n");
 	free_null_terminated_tab((void **)tokens);
 }

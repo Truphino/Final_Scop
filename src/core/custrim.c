@@ -6,7 +6,7 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 14:19:46 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/14 14:21:55 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:09:29 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char		*custrim(char *str)
 	i = 0;
 	len = ft_strlen(str);
 	start = 0;
-	while(is_whitespace(str[start]))
+	while (is_whitespace(str[start]))
 		start++;
 	i = len - 1;
 	while (is_whitespace(str[i]) && i)

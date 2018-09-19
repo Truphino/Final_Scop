@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/07 16:35:17 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/14 15:46:47 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:10:10 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ int			get_extension(const char *file_name)
 		}
 	}
 	exit(0);
-}
-
-int			face_count_triangles(char *line)
-{
-	int		i;
-	char	**split;
-
-	i = 1;
-	split = ft_strsplit(line, ' ');
-	while (split[i])
-		i++;
-	i -= 1;
-	i -= 2;
-	free_null_terminated_tab((void **)split);
-	return (i);
 }
 
 void		meta_obj(t_obj_data *od, const int fd)

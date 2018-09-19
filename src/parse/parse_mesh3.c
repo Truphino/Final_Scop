@@ -6,11 +6,26 @@
 /*   By: trecomps <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 11:59:12 by trecomps          #+#    #+#             */
-/*   Updated: 2018/09/11 15:22:15 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:10:32 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scope.h"
+
+int			face_count_triangles(char *line)
+{
+	int		i;
+	char	**split;
+
+	i = 1;
+	split = ft_strsplit(line, ' ');
+	while (split[i])
+		i++;
+	i -= 1;
+	i -= 2;
+	free_null_terminated_tab((void **)split);
+	return (i);
+}
 
 void			push_obj_texture(t_obj_data *od, char *line)
 {

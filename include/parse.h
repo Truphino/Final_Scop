@@ -6,7 +6,7 @@
 /*   By: dgaitsgo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 15:04:40 by dgaitsgo          #+#    #+#             */
-/*   Updated: 2018/09/14 14:43:54 by trecomps         ###   ########.fr       */
+/*   Updated: 2018/09/19 12:11:00 by trecomps         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void		load_subfield(t_obj_data *od, char *tokens, int pos);
 void		push_obj_face_data(t_obj_data *od, char *line);
 void		push_obj_texture(t_obj_data *od, char *line);
 void		parse_line(t_obj_data *od, char *line);
+int			face_count_triangles(char *line);
 
 #endif
